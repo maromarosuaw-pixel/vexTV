@@ -11,8 +11,8 @@
       --gradient-speed: 10s;
 
       /* Jasny motyw (domyślny) */
-      --bg-a: #b38aff;   /* fiolet */
-      --bg-b: #ffffff;   /* biały */
+      --bg-a: #b38aff;
+      --bg-b: #ffffff;
 
       --text: #201838;
       --muted: #5b4b86;
@@ -41,13 +41,15 @@
       --yt: #ff1f4a;
       --discord: #5865F2;
       --instagram: #E4405F;
+
+      /* Serca */
+      --heart-opacity: 0.24; /* jasny motyw */
     }
 
-    /* Motyw ciemny — 3-kolorowy gradient z neonowym fioletem */
     html[data-theme="dark"] {
-      --bg-a: #281457; /* ciemny fiolet 1 */
-      --bg-b: #3d1a77; /* ciemny fiolet 2 */
-      --bg-c: #a100ff; /* neon electric violet */
+      --bg-a: #281457;
+      --bg-b: #3d1a77;
+      --bg-c: #a100ff;
 
       --text: #eadfff;
       --muted: #cbb5ff;
@@ -69,6 +71,8 @@
       --video-border: rgba(215,182,255,0.22);
       --video-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 22px rgba(185,133,255,0.16);
       --video-bg: #000000;
+
+      --heart-opacity: 0.20; /* ciemny motyw */
     }
 
     * { box-sizing: border-box; }
@@ -79,7 +83,7 @@
       font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
 
-      /* Jasny motyw: 2‑kolorowy gradient 50/50 (miękkie przejście 45–55%) */
+      /* Jasny: 50/50 (miękkie przejście 45–55%) */
       background-image: linear-gradient(135deg,
         var(--bg-a) 0%,
         var(--bg-a) 45%,
@@ -94,7 +98,7 @@
       overflow-x: hidden;
     }
 
-    /* Ciemny motyw: 3‑kolorowy gradient z neonem */
+    /* Ciemny: 3-kolorowy z neonem */
     html[data-theme="dark"] body {
       background-image: linear-gradient(135deg,
         var(--bg-a) 0%,
@@ -108,7 +112,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      z-index: 1;         /* pod treścią */
+      z-index: 0; /* pod sercami i treścią */
       pointer-events: none;
       background: radial-gradient(ellipse at 50% 35%,
         rgba(0,0,0,0.22),
@@ -124,11 +128,36 @@
 
     @media (prefers-reduced-motion: reduce) {
       body { animation: none; }
+      .bg-hearts svg { animation: none !important; opacity: 0.08 !important; }
+    }
+
+    /* Latające czarne serca w tle (pod treścią) */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      z-index: 1; /* pod .container (który ma z-index:2) */
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-hearts svg {
+      position: absolute;
+      top: 0;
+      left: var(--x, 50%);
+      width: var(--size, 32px);
+      height: var(--size, 32px);
+      fill: rgba(0,0,0,var(--heart-opacity));
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18));
+      transform: translate(-50%, 110vh) scale(var(--scale, 1)) rotate(0turn);
+      animation: floatUp var(--dur, 28s) linear infinite var(--delay, 0s);
+    }
+    @keyframes floatUp {
+      0%   { transform: translate(-50%, 110vh) scale(var(--scale, 1)) rotate(0turn); }
+      100% { transform: translate(-50%, -120vh) scale(var(--scale, 1)) rotate(0.2turn); }
     }
 
     .container {
       position: relative;
-      z-index: 2; /* nad overlayem */
+      z-index: 2; /* nad sercami */
       max-width: 980px;
       margin: 0 auto;
       padding: 24px;
@@ -328,7 +357,6 @@
 
     .socials { margin-top: 24px; }
 
-    /* Przycisk przełącznika motywu */
     .theme-toggle {
       position: fixed;
       top: 16px;
@@ -361,6 +389,36 @@
   </style>
 </head>
 <body>
+  <!-- Latające czarne serca (pod treścią) -->
+  <div class="bg-hearts" aria-hidden="true">
+    <!-- Oryginalne -->
+    <svg viewBox="0 0 24 24" style="--x: 6%;  --size: 28px; --scale: 1;    --dur: 24s; --delay: -2s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 12%; --size: 36px; --scale: 1.1; --dur: 30s; --delay: -10s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 18%; --size: 44px; --scale: .9;  --dur: 38s; --delay: -18s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 24%; --size: 26px; --scale: .8;  --dur: 22s; --delay: -6s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 30%; --size: 40px; --scale: 1.2; --dur: 44s; --delay: -4s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 36%; --size: 22px; --scale: .9;  --dur: 20s; --delay: -26s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 42%; --size: 34px; --scale: 1;   --dur: 32s; --delay: -14s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 48%; --size: 48px; --scale: 1.1; --dur: 46s; --delay: -8s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 54%; --size: 24px; --scale: .85; --dur: 24s; --delay: -20s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 60%; --size: 30px; --scale: 1;   --dur: 28s; --delay: -6s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 66%; --size: 42px; --scale: 1.08;--dur: 40s; --delay: -12s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 72%; --size: 26px; --scale: .9;  --dur: 22s; --delay: -28s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 78%; --size: 38px; --scale: 1.02;--dur: 34s; --delay: -16s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 84%; --size: 24px; --scale: .8;  --dur: 24s; --delay: -4s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 90%; --size: 46px; --scale: 1.15;--dur: 42s; --delay: -22s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <!-- Dodatkowe, zagęszczenie -->
+    <svg viewBox="0 0 24 24" style="--x: 3%;  --size: 32px; --scale: .95; --dur: 26s; --delay: -9s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 96%; --size: 28px; --scale: .9;  --dur: 28s; --delay: -30s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+    <!-- NOWE: ~+30% więcej -->
+    <svg viewBox="0 0 24 24" style="--x: 9%;  --size: 30px; --scale: .95; --dur: 26s; --delay: -7s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 27%; --size: 35px; --scale: 1.05; --dur: 33s; --delay: -15s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 39%; --size: 25px; --scale: .85; --dur: 21s; --delay: -19s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 57%; --size: 33px; --scale: 1;    --dur: 29s; --delay: -11s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 75%; --size: 41px; --scale: 1.12; --dur: 41s; --delay: -3s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+  </div>
+
   <!-- Przełącznik motywu -->
   <button id="themeToggle" class="theme-toggle" type="button" aria-label="Przełącz na ciemny motyw" aria-pressed="false">🌙 Ciemny</button>
 
@@ -395,8 +453,8 @@
       <section class="card updates" aria-labelledby="updates-title">
         <h2 id="updates-title">Aktualne informacje</h2>
 
-        <!-- Ustaw tu aktualną liczbę subów: data-current -->
-        <div class="goal" data-current="0" data-goal="1000" role="group" aria-label="Cel subskrypcji 1000">
+        <!-- Ustawione: 2/1000 -->
+        <div class="goal" data-current="2" data-goal="1000" role="group" aria-label="Cel subskrypcji 1000">
           <div class="row">
             <span class="icon youtube" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/></svg>
@@ -404,7 +462,7 @@
             <span class="label">Cel subskrypcji — <strong>1000</strong></span>
             <span class="value" aria-live="polite">2 / 1000</span>
           </div>
-          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0">
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="2">
             <span class="bar"></span>
           </div>
         </div>
@@ -534,7 +592,4 @@
     })();
   </script>
 </body>
-
 </html>
-
-
