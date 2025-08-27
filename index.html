@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rodzinka Furaska Vexa</title>
+  <meta name="description" content="Witamy w rodzince Furaska Vexa — rozgość się i sprawdź co dla Ciebie przygotowaliśmy." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient-speed: 10s;
+
+      /* Jasny motyw (domyślny) */
+      --bg-a: #b38aff;   /* fiolet */
+      --bg-b: #ffffff;   /* biały */
+
+      --text: #201838;
+      --muted: #5b4b86;
+      --accent: #7e5cff;
+      --accent-strong: #613eff;
+
+      --card-bg: rgba(255,255,255,0.6);
+      --card-border: rgba(126, 92, 255, 0.28);
+
+      --hr-color: rgba(126,92,255,0.55);
+
+      /* Przyciski */
+      --btn-bg: rgba(126, 92, 255, 0.08);
+      --btn-border: rgba(126, 92, 255, 0.36);
+      --btn-bg-hover: rgba(126, 92, 255, 0.16);
+      --btn-border-hover: rgba(126, 92, 255, 0.65);
+      --btn-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      --btn-shadow-hover: 0 12px 28px rgba(0,0,0,0.12), 0 0 24px rgba(126,92,255,0.18);
+
+      /* Media (wideo) */
+      --video-border: rgba(126, 92, 255, 0.22);
+      --video-shadow: 0 10px 30px rgba(0,0,0,0.12), 0 0 22px rgba(126,92,255,0.12);
+      --video-bg: #ffffff;
+
+      /* Brand colors */
+      --yt: #ff1f4a;
+      --discord: #5865F2;
+      --instagram: #E4405F;
+    }
+
+    /* Motyw ciemny — 3-kolorowy gradient z neonowym fioletem */
+    html[data-theme="dark"] {
+      --bg-a: #281457; /* ciemny fiolet 1 */
+      --bg-b: #3d1a77; /* ciemny fiolet 2 */
+      --bg-c: #a100ff; /* neon electric violet */
+
+      --text: #eadfff;
+      --muted: #cbb5ff;
+      --accent: #d7b6ff;
+      --accent-strong: #b985ff;
+
+      --card-bg: rgba(255,255,255,0.05);
+      --card-border: rgba(220,180,255,0.18);
+
+      --hr-color: rgba(215,182,255,0.60);
+
+      --btn-bg: rgba(215,182,255,0.06);
+      --btn-border: rgba(215,182,255,0.42);
+      --btn-bg-hover: rgba(215,182,255,0.12);
+      --btn-border-hover: rgba(215,182,255,0.70);
+      --btn-shadow: 0 8px 22px rgba(0,0,0,0.28);
+      --btn-shadow-hover: 0 12px 28px rgba(0,0,0,0.35), 0 0 24px rgba(185,133,255,0.24);
+
+      --video-border: rgba(215,182,255,0.22);
+      --video-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 22px rgba(185,133,255,0.16);
+      --video-bg: #000000;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      position: relative;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+
+      /* Jasny motyw: 2‑kolorowy gradient 50/50 (miękkie przejście 45–55%) */
+      background-image: linear-gradient(135deg,
+        var(--bg-a) 0%,
+        var(--bg-a) 45%,
+        var(--bg-b) 55%,
+        var(--bg-b) 100%
+      );
+      background-size: 300% 300%;
+      background-attachment: fixed;
+      animation: bgGradient var(--gradient-speed) ease-in-out infinite;
+
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ciemny motyw: 3‑kolorowy gradient z neonem */
+    html[data-theme="dark"] body {
+      background-image: linear-gradient(135deg,
+        var(--bg-a) 0%,
+        var(--bg-b) 58%,
+        var(--bg-c) 100%
+      );
+    }
+
+    /* Delikatne przyciemnienie centrum w dark mode (czytelność) */
+    html[data-theme="dark"] body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;         /* pod treścią */
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 35%,
+        rgba(0,0,0,0.22),
+        transparent 60%
+      );
+    }
+
+    @keyframes bgGradient {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2; /* nad overlayem */
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      padding: 44px 0 8px;
+      text-align: center;
+    }
+    h1 {
+      font-size: clamp(32px, 7vw, 72px);
+      margin: 0 0 8px;
+      line-height: 1.1;
+      letter-spacing: 1px;
+      color: var(--accent);
+      text-shadow:
+        0 0 16px rgba(126, 92, 255, 0.28),
+        0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .fancy-intro {
+      margin: 2px auto 6px;
+      max-width: 920px;
+      font-size: clamp(16px, 3.2vw, 24px);
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .3px;
+      text-shadow:
+        0 0 12px rgba(126,92,255,0.18),
+        0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .subtitle {
+      font-weight: 600;
+      color: var(--muted);
+      opacity: 0.95;
+    }
+
+    .card {
+      margin: 24px auto;
+      padding: 24px 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow:
+        0 8px 24px rgba(0,0,0,0.10),
+        0 0 22px rgba(126,92,255,0.10);
+    }
+    .content p { margin: 0 0 12px; font-size: clamp(16px, 2.3vw, 20px); }
+
+    .info {
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(126,92,255,0.25);
+      color: var(--muted);
+    }
+
+    /* Dodatkowa ramka z informacjami + ikony + progress */
+    .updates h2 {
+      margin: 0 0 12px;
+      font-size: clamp(18px, 2.6vw, 22px);
+      color: var(--accent-strong);
+      text-shadow: 0 0 12px rgba(126,92,255,0.14);
+    }
+
+    .updates .goal .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .updates .goal .label strong { color: var(--accent-strong); }
+    .updates .goal .value {
+      font-weight: 800;
+      color: var(--accent-strong);
+      white-space: nowrap;
+    }
+    .updates .progress {
+      position: relative;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(126, 92, 255, 0.18);
+      border: 1px solid rgba(126, 92, 255, 0.35);
+    }
+    .updates .progress .bar {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(126,92,255,0.35);
+      transition: width .6s ease;
+    }
+
+    .updates ul {
+      list-style: none;
+      padding: 10px 0 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .updates li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .updates .icon {
+      display: inline-flex;
+      width: 20px;
+      height: 20px;
+      color: var(--muted);
+      flex: 0 0 20px;
+    }
+    .updates .icon svg { width: 20px; height: 20px; display: block; }
+    .updates .icon.youtube { color: var(--yt); }
+    .updates .icon.discord { color: var(--discord); }
+    .updates .icon.instagram { color: var(--instagram); }
+    .updates .icon.info { color: var(--accent-strong); }
+
+    a.btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      color: var(--accent-strong);
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: var(--btn-shadow);
+      transition: transform .15s ease,
+                  background-color .2s ease,
+                  box-shadow .2s ease,
+                  border-color .2s ease,
+                  color .2s ease;
+      cursor: pointer;
+    }
+    a.btn:hover {
+      transform: translateY(-1px);
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      box-shadow: var(--btn-shadow-hover);
+      color: var(--accent-strong);
+    }
+
+    a.btn.social-btn { display: inline-flex; align-items: center; gap: 10px; }
+    a.btn.social-btn svg { width: 20px; height: 20px; }
+    .btn--youtube {
+      background: rgba(255, 31, 74, 0.10);
+      border-color: rgba(255, 31, 74, 0.55);
+      color: #d6284e;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 31, 74, 0.12),
+        0 8px 22px rgba(0,0,0,0.08);
+    }
+    .btn--youtube:hover {
+      background: rgba(255, 31, 74, 0.18);
+      border-color: rgba(255, 31, 74, 0.85);
+      color: #a31536;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 31, 74, 0.18),
+        0 12px 28px rgba(0,0,0,0.12),
+        0 0 24px rgba(255, 50, 90, 0.22);
+    }
+
+    hr.sep {
+      border: none;
+      height: 1px;
+      margin: 24px auto;
+      max-width: 460px;
+      background: linear-gradient(90deg, transparent, var(--hr-color), transparent);
+    }
+    footer {
+      margin-top: 32px;
+      padding: 24px 0 40px;
+      text-align: center;
+    }
+    footer p { margin: 0 0 12px; font-weight: 600; }
+
+    .video {
+      position: relative;
+      width: min(100%, 860px);
+      margin: 0 auto 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--video-border);
+      box-shadow: var(--video-shadow);
+      background: var(--video-bg);
+    }
+    .video::before { content: ""; display: block; padding-top: 56.25%; }
+    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    .socials { margin-top: 24px; }
+
+    /* Przycisk przełącznika motywu */
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      color: var(--accent-strong);
+      font-weight: 700;
+      box-shadow: var(--btn-shadow);
+      cursor: pointer;
+      transition: transform .15s ease,
+                  background-color .2s ease,
+                  box-shadow .2s ease,
+                  border-color .2s ease,
+                  color .2s ease;
+    }
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      box-shadow: var(--btn-shadow-hover);
+    }
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Przełącznik motywu -->
+  <button id="themeToggle" class="theme-toggle" type="button" aria-label="Przełącz na ciemny motyw" aria-pressed="false">🌙 Ciemny</button>
+
+  <div class="container">
+    <header>
+      <h1>𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
+
+      <p class="fancy-intro">𝓭𝔃𝓲ę𝓴𝓾𝓳𝓮 ż𝓮 𝔃𝓪𝓳𝓻𝔃𝓪ł𝓮ś 𝓷𝓪  𝓶𝓸𝓳ą𝓼𝓽𝓻𝓸𝓷𝓮, 𝓻𝓸𝔃𝓰𝓸ść 𝓼𝓲𝓮 𝓲 𝓹𝓸𝓹𝓪𝓽𝓻𝔃 𝓬𝓸  𝓽𝓾𝓽𝓪𝓳 𝓳𝓮𝓼𝓽 𝓬𝓲𝓮𝓴𝓪𝔀𝓮𝓰𝓸, 𝓶𝓲ł𝓮𝓰𝓸 𝓹𝓻𝔃𝓮𝓰𝓵ą𝓭𝓪𝓷𝓲𝓪 ^^</p>
+
+      <div class="video hero-video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/pos632jmaNE?si=DGikv9cLFB1caLDC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class="subtitle">Miło, że wpadłeś/aś! Rozgość się ☺️</div>
+    </header>
+
+    <main>
+      <section class="card content">
+        <p>witam na stronie internetowej vexa, tutaj znajdziesz coś dla siebie i nie tylko, będziesz mógł tutaj sie poczuć jak u siebie, jeśli podoba ci sie moja twórczość wesprzyj mnie dotacją tutaj</p>
+        <p>
+          <a class="btn" href="https://tipply.pl/@VexTV" target="_blank" rel="noopener">❤️ Wesprzyj mnie na Tipply</a>
+        </p>
+
+        <div class="info">
+          <p>Chciałbym, żebyście czuli się tutaj jak u siebie w domu 🏠 Dlatego zapraszam Was na mój kanał na YouTube — znajdziecie go na samym dole strony.</p>
+          <p>Chcę razem z Wami tworzyć społeczność, na której bardzo mi zależy, i być dla Was jak najlepszy ❤️</p>
+          <p>Tutaj będę na bieżąco dodawał potrzebne informacje, aktualizowane co jakiś czas.</p>
+        </div>
+      </section>
+
+      <!-- Dodatkowa ramka z informacjami, ikonami i celem subów -->
+      <section class="card updates" aria-labelledby="updates-title">
+        <h2 id="updates-title">Aktualne informacje</h2>
+
+        <!-- Ustaw tu aktualną liczbę subów: data-current -->
+        <div class="goal" data-current="0" data-goal="1000" role="group" aria-label="Cel subskrypcji 1000">
+          <div class="row">
+            <span class="icon youtube" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/></svg>
+            </span>
+            <span class="label">Cel subskrypcji — <strong>1000</strong></span>
+            <span class="value" aria-live="polite">0 / 1000</span>
+          </div>
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0">
+            <span class="bar"></span>
+          </div>
+        </div>
+
+        <ul class="list" role="list">
+          <li class="item">
+            <span class="icon discord" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.207.363-.444.84-.608 1.215a17.456 17.456 0 00-5.9 0C9.888 3.84 9.65 3.363 9.443 3a19.736 19.736 0 00-3.76 1.37C2.256 9.099 1.385 13.63 1.742 18.108A19.8 19.8 0 007.58 21c.3-.41.565-.847.79-1.305a12.91 12.91 0 01-1.247-.592l.302-.237a14.2 14.2 0 009.13 0l.304.237c-.41.2-.83.41-1.25.59.23.46.49.9.79 1.31a19.76 19.76 0 005.84-2.89c.47-5.54-.8-10.02-2.87-13.74zM9.347 15.5c-1.1 0-2.002-1.01-2.002-2.255 0-1.245.89-2.255 2.002-2.255 1.123 0 2.015 1.01 2.015 2.255 0 1.245-.902 2.255-2.015 2.255zm5.306 0c-1.1 0-2.003-1.01-2.003-2.255 0-1.245.89-2.255 2.003-2.255 1.122 0 2.015 1.01 2.015 2.255 0 1.245-.893 2.255-2.015 2.255z"/></svg>
+            </span>
+            <span>Serwer Discord powstanie za niedługo</span>
+          </li>
+          <li class="item">
+            <span class="icon instagram" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm0 2.2a2.8 2.8 0 100 5.6 2.8 2.8 0 000-5.6zM18 6.5a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg>
+            </span>
+            <span>Instagram Furaska — za niedługo</span>
+          </li>
+          <li class="item">
+            <span class="icon info" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 110 20 10 10 0 010-20zm1 5h-2v2h2V7zm0 4h-2v7h2v-7z"/></svg>
+            </span>
+            <span>Wszystkie informacje będą na bieżąco aktualizowane</span>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="sep" />
+
+      <footer>
+        <div class="socials">
+          <p>Znajdziesz mnie też tutaj:</p>
+          <p>
+            <a class="btn social-btn btn--youtube"
+               href="https://youtube.com/@vextv-f8b?si=MYVJGZAAMCjPPIl4"
+               target="_blank" rel="noopener"
+               aria-label="Subskrybuj kanał VexTV na YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
+              </svg>
+              Subskrybuj na YouTube
+            </a>
+          </p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = 'theme';
+
+      const getStoredTheme = () => localStorage.getItem(storageKey);
+      const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        updateToggleButton(theme);
+      }
+
+      function setTheme(theme) {
+        localStorage.setItem(storageKey, theme);
+        applyTheme(theme);
+      }
+
+      function getInitialTheme() {
+        const stored = getStoredTheme();
+        if (stored === 'dark' || stored === 'light') return stored;
+        return prefersDark() ? 'dark' : 'light';
+      }
+
+      function updateToggleButton(theme) {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        if (theme === 'dark') {
+          btn.innerHTML = '☀️ Jasny';
+          btn.setAttribute('aria-label', 'Przełącz na jasny motyw');
+          btn.setAttribute('aria-pressed', 'true');
+        } else {
+          btn.innerHTML = '🌙 Ciemny';
+          btn.setAttribute('aria-label', 'Przełącz na ciemny motyw');
+          btn.setAttribute('aria-pressed', 'false');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        applyTheme(getInitialTheme());
+
+        const btn = document.getElementById('themeToggle');
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          setTheme(next);
+        });
+
+        // Ustaw pasek postępu subów
+        (function() {
+          const goal = document.querySelector('.updates .goal');
+          if (!goal) return;
+          const current = parseInt(goal.getAttribute('data-current'), 10) || 0;
+          const target  = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
+          const pct = Math.max(0, Math.min(100, (current / target) * 100));
+
+          const bar = goal.querySelector('.bar');
+          const valueEl = goal.querySelector('.value');
+          const progressEl = goal.querySelector('.progress');
+
+          if (bar) bar.style.width = pct + '%';
+          if (valueEl) valueEl.textContent = current + ' / ' + target;
+          if (progressEl) {
+            progressEl.setAttribute('aria-valuenow', current);
+            progressEl.setAttribute('aria-valuemax', target);
+          }
+        })();
+
+        // Reaguj na zmianę preferencji systemowych, jeśli brak własnego wyboru
+        if (window.matchMedia) {
+          const media = window.matchMedia('(prefers-color-scheme: dark)');
+          if (media.addEventListener) {
+            media.addEventListener('change', (e) => {
+              if (!getStoredTheme()) {
+                applyTheme(e.matches ? 'dark' : 'light');
+              }
+            });
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
