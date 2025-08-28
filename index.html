@@ -32,11 +32,6 @@
       --btn-shadow: 0 8px 22px rgba(0,0,0,0.08);
       --btn-shadow-hover: 0 12px 28px rgba(0,0,0,0.12), 0 0 24px rgba(126,92,255,0.18);
 
-      /* Pola formularza (jasny) */
-      --input-bg: rgba(126, 92, 255, 0.08);
-      --input-border: rgba(126, 92, 255, 0.36);
-      --input-focus: rgba(126, 92, 255, 0.65);
-
       /* Media (wideo) */
       --video-border: rgba(126, 92, 255, 0.22);
       --video-shadow: 0 10px 30px rgba(0,0,0,0.12), 0 0 22px rgba(126,92,255,0.12);
@@ -47,7 +42,7 @@
       --discord: #5865F2;
       --instagram: #E4405F;
 
-      /* Serca (przyciemnione) */
+      /* Serca (przyciemnione o ~30%) */
       --heart-opacity: 0.31; /* jasny motyw */
     }
 
@@ -72,10 +67,6 @@
       --btn-border-hover: rgba(215,182,255,0.70);
       --btn-shadow: 0 8px 22px rgba(0,0,0,0.28);
       --btn-shadow-hover: 0 12px 28px rgba(0,0,0,0.35), 0 0 24px rgba(185,133,255,0.24);
-
-      --input-bg: rgba(215,182,255,0.06);
-      --input-border: rgba(215,182,255,0.42);
-      --input-focus: rgba(215,182,255,0.70);
 
       --video-border: rgba(215,182,255,0.22);
       --video-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 22px rgba(185,133,255,0.16);
@@ -291,8 +282,7 @@
     .updates .icon.instagram { color: var(--instagram); }
     .updates .icon.info { color: var(--accent-strong); }
 
-    /* Przyciski (uniwersalne a/button) */
-    .btn {
+    a.btn {
       display: inline-block;
       margin-top: 12px;
       padding: 12px 18px;
@@ -310,22 +300,16 @@
                   color .2s ease;
       cursor: pointer;
     }
-    .btn:hover {
+    a.btn:hover {
       transform: translateY(-1px);
       background: var(--btn-bg-hover);
       border-color: var(--btn-border-hover);
       box-shadow: var(--btn-shadow-hover);
       color: var(--accent-strong);
     }
-    .btn[disabled] {
-      opacity: .6;
-      cursor: not-allowed;
-      transform: none;
-      filter: grayscale(.1);
-    }
+
     a.btn.social-btn { display: inline-flex; align-items: center; gap: 10px; }
     a.btn.social-btn svg { width: 20px; height: 20px; }
-
     .btn--youtube {
       background: rgba(255, 31, 74, 0.10);
       border-color: rgba(255, 31, 74, 0.55);
@@ -344,232 +328,6 @@
         0 0 24px rgba(255, 50, 90, 0.22);
     }
 
-    /* Sekcja komentarzy */
-    .comments {
-      margin-top: 24px;
-    }
-    .comments h2 {
-      margin: 0 0 12px;
-      font-size: clamp(18px, 2.6vw, 22px);
-      color: var(--accent-strong);
-      text-shadow: 0 0 12px rgba(126,92,255,0.14);
-    }
-    .comments .helper {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    .comments-form {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .comments-form .row {
-      display: grid;
-      gap: 12px;
-    }
-    @media (min-width: 640px) {
-      .comments-form .row {
-        grid-template-columns: 1fr 2fr;
-      }
-    }
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: var(--muted);
-    }
-    .field input[type="text"],
-    .field textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--text);
-      font: inherit;
-      resize: vertical;
-      min-height: 44px;
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    }
-    .field textarea { min-height: 100px; }
-    .field input::placeholder,
-    .field textarea::placeholder { color: var(--muted); opacity: .8; }
-    .field input:focus,
-    .field textarea:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--input-focus) 25%, transparent);
-    }
-
-    .counter {
-      text-align: right;
-      font-size: .9rem;
-      color: var(--muted);
-      margin-top: -6px;
-    }
-
-    .comments-toolbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 10px;
-      margin: 6px 0 12px;
-      flex-wrap: wrap;
-    }
-    .comments-toolbar label {
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .comments-toolbar select {
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--text);
-      font: inherit;
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    }
-    .comments-toolbar select:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--input-focus) 25%, transparent);
-    }
-
-    .comment-msg {
-      min-height: 20px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .comments-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 12px;
-    }
-    .comment {
-      padding: 12px 14px;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      background: color-mix(in srgb, var(--card-bg), transparent 20%);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    }
-    .comment-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .left-head {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: #fff;
-      border: 1px solid var(--card-border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-      user-select: none;
-      flex: 0 0 36px;
-    }
-    .meta {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      min-width: 0;
-    }
-    .comment .nick {
-      font-weight: 800;
-      color: var(--accent-strong);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 40vw;
-    }
-    .comment time {
-      font-size: 0.85rem;
-      color: var(--muted);
-      opacity: 0.9;
-    }
-    .badge-edited {
-      font-size: 0.78rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px dashed var(--card-border);
-      color: var(--muted);
-      background: color-mix(in srgb, var(--card-bg), transparent 30%);
-    }
-
-    .comment-actions {
-      display: inline-flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .action-btn {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.06);
-      border: 1px solid rgba(126, 92, 255, 0.35);
-      color: var(--accent-strong);
-      font-weight: 700;
-      font-size: 0.85rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      cursor: pointer;
-      transition: background-color .2s ease, border-color .2s ease, transform .15s ease, opacity .2s ease;
-    }
-    .action-btn:hover {
-      transform: translateY(-1px);
-      background: rgba(126, 92, 255, 0.14);
-      border-color: var(--input-focus);
-    }
-    .action-btn[disabled] { opacity: .6; cursor: not-allowed; transform: none; }
-
-    .comment-body {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-size: 0.98rem;
-    }
-
-    .edit-area {
-      display: grid;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .edit-area textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--text);
-      font: inherit;
-      min-height: 80px;
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    }
-    .edit-area textarea:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--input-focus) 25%, transparent);
-    }
-    .edit-actions { display: inline-flex; gap: 8px; flex-wrap: wrap; }
-    .save-btn { background: rgba(97,62,255,0.12); }
-    .cancel-btn { background: rgba(0,0,0,0.06); }
-
     hr.sep {
       border: none;
       height: 1px;
@@ -579,7 +337,7 @@
     }
     footer {
       margin-top: 32px;
-      padding: 24px 0 16px;
+      padding: 24px 0 40px;
       text-align: center;
     }
     footer p { margin: 0 0 12px; font-weight: 600; }
@@ -633,10 +391,7 @@
 <body>
   <!-- Latające czarne serca (pod treścią) -->
   <div class="bg-hearts" aria-hidden="true">
-    <!-- (zestaw serc — jak w poprzedniej wersji, zachowany) -->
-    <!-- Dla czytelności: ten blok zawiera wiele <svg> serc o różnych parametrach -->
-    <!-- Możesz pozostawić bez zmian; serca są pod treścią i nie przeszkadzają w UI -->
-    <!-- POCZĄTEK SERCA -->
+    <!-- Bazowy zestaw -->
     <svg viewBox="0 0 24 24" style="--x: 6%;  --size: 28px; --scale: 1;    --dur: 24s; --delay: -2s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 12%; --size: 36px; --scale: 1.1; --dur: 30s; --delay: -10s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 18%; --size: 44px; --scale: .9;  --dur: 38s; --delay: -18s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -652,24 +407,23 @@
     <svg viewBox="0 0 24 24" style="--x: 78%; --size: 38px; --scale: 1.02;--dur: 34s; --delay: -16s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 84%; --size: 24px; --scale: .8;  --dur: 24s; --delay: -4s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 90%; --size: 46px; --scale: 1.15;--dur: 42s; --delay: -22s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    <!-- Dodatkowe (zagęszczenie) -->
+    <!-- Dodatkowe -->
     <svg viewBox="0 0 24 24" style="--x: 3%;  --size: 32px; --scale: .95; --dur: 26s; --delay: -9s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 96%; --size: 28px; --scale: .9;  --dur: 28s; --delay: -30s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
 
-    <!-- ~+30% (wcześniej dodane) -->
+    <!-- ~+30% wcześniej dodane -->
     <svg viewBox="0 0 24 24" style="--x: 9%;  --size: 30px; --scale: .95; --dur: 26s; --delay: -7s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 27%; --size: 35px; --scale: 1.05; --dur: 33s; --delay: -15s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 39%; --size: 25px; --scale: .85; --dur: 21s; --delay: -19s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 57%; --size: 33px; --scale: 1;    --dur: 29s; --delay: -11s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 75%; --size: 41px; --scale: 1.12; --dur: 41s; --delay: -3s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
 
-    <!-- ~+20% (5 szt.) -->
+    <!-- NOWE: ~+20% więcej (5 szt.) -->
     <svg viewBox="0 0 24 24" style="--x: 15%; --size: 29px; --scale: .9;  --dur: 25s; --delay: -5s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 33%; --size: 37px; --scale: 1.05;--dur: 36s; --delay: -9s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 51%; --size: 31px; --scale: 1;   --dur: 27s; --delay: -13s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 69%; --size: 43px; --scale: 1.1; --dur: 39s; --delay: -21s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 87%; --size: 27px; --scale: .85; --dur: 23s; --delay: -17s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    <!-- KONIEC SERCA -->
   </div>
 
   <!-- Przełącznik motywu -->
@@ -679,7 +433,7 @@
     <header>
       <h1>𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
 
-      <p class="fancy-intro">𝓭𝔃𝓲ę𝓴𝓾𝓳𝓮 ż𝓮 𝔃𝓪𝓳𝓻𝔃𝓪ł𝓮ś 𝓷𝓪  𝓶𝓸𝓳ą𝓼𝓽𝓻𝓸𝓷𝓮, 𝓻𝓸𝔃𝓰𝓸ść 𝓼𝓲𝓮 𝓲  𝓹𝓸𝓹𝓪𝓽𝓻𝔃 𝓬𝓸  𝓽𝓾𝓽𝓪𝔂 𝓳𝓮𝓼𝓽 𝓬𝓲𝓮𝓴𝓪𝔀𝓮𝓰𝓸, 𝓶𝓲ł𝓮𝓰𝓸 𝓹𝓻𝔃𝓮𝓰𝓵ą𝓭𝓪𝓷𝓲𝓪 ^^</p>
+      <p class="fancy-intro">𝓭𝔃𝓲ę𝓴𝓾𝓳𝓮 ż𝓮 𝔃𝓪𝓳𝓻𝔃𝓪ł𝓮ś 𝓷𝓪  𝓶𝓸𝓳ą𝓼𝓽𝓻𝓸𝓷𝓮, 𝓻𝓸𝔃𝓰𝓸ść 𝓼𝓲𝓮 𝓲  𝓹𝓸𝓹𝓪𝓽𝓻𝔃 𝓬𝓸  𝓽𝓾𝓽𝓪𝓳 𝓳𝓮𝓼𝓽 𝓬𝓲𝓮𝓴𝓪𝔀𝓮𝓰𝓸, 𝓶𝓲ł𝓮𝓰𝓸 𝓹𝓻𝔃𝓮𝓰𝓵ą𝓭𝓪𝓷𝓲𝓪 ^^</p>
 
       <div class="video hero-video">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/pos632jmaNE?si=DGikv9cLFB1caLDC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -723,7 +477,7 @@
         <ul class="list" role="list">
           <li class="item">
             <span class="icon discord" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.207.363-.444.84-.608 1.215a17.456 17.456 0 00-5.9 0C9.888 3.84 9.65 3.363 9.443 3a19.736 19.736 0 00-3.76 1.37C2.256 9.099 1.385 13.63 1.742 18.108A19.8 19.8 0 007.58 21c.3-.41.565-.847.79-1.305a12.91 12.91 0 01-1.247-.592l.302-.237a14.2 14.2 0 009.13 0l.304.237c-.41 .2-.83 .41-1.25 .59.23 .46 .49 .9 .79 1.31a19.76 19.76 0 005.84-2.89c.47-5.54-.8-10.02-2.87-13.74zM9.347 15.5c-1.1 0-2.002-1.01-2.002-2.255 0-1.245.89-2.255 2.002-2.255 1.123 0 2.015 1.01 2.015 2.255 0 1.245-.902 2.255-2.015 2.255zm5.306 0c-1.1 0-2.003-1.01-2.003-2.255 0-1.245.89-2.255 2.003-2.255 1.122 0 2.015 1.01 2.015 2.255 0 1.245-.893 2.255-2.015 2.255z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.207.363-.444.84-.608 1.215a17.456 17.456 0 00-5.9 0C9.888 3.84 9.65 3.363 9.443 3a19.736 19.736 0 00-3.76 1.37C2.256 9.099 1.385 13.63 1.742 18.108A19.8 19.8 0 007.58 21c.3-.41.565-.847.79-1.305a12.91 12.91 0 01-1.247-.592l.302-.237a14.2 14.2 0 009.13 0l.304.237c-.41.2-.83.41-1.25.59.23.46.49.9.79 1.31a19.76 19.76 0 005.84-2.89c.47-5.54-.8-10.02-2.87-13.74zM9.347 15.5c-1.1 0-2.002-1.01-2.002-2.255 0-1.245.89-2.255 2.002-2.255 1.123 0 2.015 1.01 2.015 2.255 0 1.245-.902 2.255-2.015 2.255zm5.306 0c-1.1 0-2.003-1.01-2.003-2.255 0-1.245.89-2.255 2.003-2.255 1.122 0 2.015 1.01 2.015 2.255 0 1.245-.893 2.255-2.015 2.255z"/></svg>
             </span>
             <span>Serwer Discord powstanie za niedługo</span>
           </li>
@@ -760,40 +514,6 @@
           </p>
         </div>
       </footer>
-
-      <!-- PANEL KOMENTARZY -->
-      <section class="card comments" aria-labelledby="comments-title">
-        <h2 id="comments-title">Komentarze</h2>
-        <p class="helper">Dodaj komentarz bez logowania. Komentarze zapisują się lokalnie w Twojej przeglądarce. Możesz edytować (przez 15 minut) i usuwać swoje. Cooldown: 3 godziny.</p>
-
-        <form id="commentForm" class="comments-form" novalidate>
-          <div class="row">
-            <div class="field">
-              <label for="nick">Nick</label>
-              <input type="text" id="nick" name="nick" maxlength="24" placeholder="Wpisz swój nick" required>
-            </div>
-
-            <div class="field">
-              <label for="comment">Komentarz</label>
-              <textarea id="comment" name="comment" maxlength="10000" placeholder="Napisz coś miłego 😊" required></textarea>
-              <div id="charCounter" class="counter">0 / 10 000</div>
-            </div>
-          </div>
-
-          <button id="publishBtn" type="submit" class="btn">Opublikuj</button>
-          <div id="commentMsg" class="comment-msg" aria-live="polite"></div>
-        </form>
-
-        <div class="comments-toolbar">
-          <label for="sortSelect">Sortuj:</label>
-          <select id="sortSelect" aria-label="Sortuj komentarze">
-            <option value="desc">Najnowsze</option>
-            <option value="asc">Najstarsze</option>
-          </select>
-        </div>
-
-        <ul id="commentsList" class="comments-list" role="list"></ul>
-      </section>
     </main>
   </div>
 
@@ -808,15 +528,18 @@
         document.documentElement.setAttribute('data-theme', theme);
         updateToggleButton(theme);
       }
+
       function setTheme(theme) {
         localStorage.setItem(storageKey, theme);
         applyTheme(theme);
       }
+
       function getInitialTheme() {
         const stored = getStoredTheme();
         if (stored === 'dark' || stored === 'light') return stored;
         return prefersDark() ? 'dark' : 'light';
       }
+
       function updateToggleButton(theme) {
         const btn = document.getElementById('themeToggle');
         if (!btn) return;
@@ -841,16 +564,18 @@
           setTheme(next);
         });
 
-        // Pasek postępu subów
+        // Ustaw pasek postępu subów
         (function() {
           const goal = document.querySelector('.updates .goal');
           if (!goal) return;
           const current = parseInt(goal.getAttribute('data-current'), 10) || 0;
           const target  = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
           const pct = Math.max(0, Math.min(100, (current / target) * 100));
+
           const bar = goal.querySelector('.bar');
           const valueEl = goal.querySelector('.value');
           const progressEl = goal.querySelector('.progress');
+
           if (bar) bar.style.width = pct + '%';
           if (valueEl) valueEl.textContent = current + ' / ' + target;
           if (progressEl) {
@@ -859,361 +584,12 @@
           }
         })();
 
-        // Komentarze (localStorage + usuwanie + edycja + cooldown + sort + licznik)
-        const COMMENTS_KEY = 'vex_comments';
-        const LAST_TS_KEY  = 'vex_comments_last_ts';
-        const CID_KEY      = 'vex_cid';
-        const SORT_KEY     = 'vex_comments_sort';
-        const COOLDOWN_MS  = 3 * 60 * 60 * 1000; // 3h
-        const EDIT_WINDOW_MS = 15 * 60 * 1000;   // 15 min
-        const MAX_LEN = 10000;
-
-        const form = document.getElementById('commentForm');
-        const publishBtn = document.getElementById('publishBtn');
-        const nickEl = document.getElementById('nick');
-        const commentEl = document.getElementById('comment');
-        const counterEl = document.getElementById('charCounter');
-        const msgEl = document.getElementById('commentMsg');
-        const listEl = document.getElementById('commentsList');
-        const sortSelect = document.getElementById('sortSelect');
-
-        function getClientId() {
-          let cid = localStorage.getItem(CID_KEY);
-          if (!cid) {
-            cid = 'cid-' + Math.random().toString(36).slice(2,10) + '-' + Date.now().toString(36);
-            try { localStorage.setItem(CID_KEY, cid); } catch(e) {}
-          }
-          return cid;
-        }
-        const clientId = getClientId();
-
-        function loadComments() {
-          try {
-            const raw = localStorage.getItem(COMMENTS_KEY);
-            return raw ? JSON.parse(raw) : [];
-          } catch(e) {
-            return [];
-          }
-        }
-        function saveComments(arr) {
-          try {
-            localStorage.setItem(COMMENTS_KEY, JSON.stringify(arr));
-          } catch(e) {}
-        }
-        function escapeHtml(str) {
-          return str.replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-        }
-        function uuid() {
-          return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8);
-        }
-
-        function initialsFromNick(nick) {
-          const clean = (nick || '').trim();
-          if (!clean) return '?';
-          const parts = clean.split(/\s+/).filter(Boolean);
-          if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-          return clean.slice(0,2).toUpperCase();
-        }
-        function colorFromNick(nick) {
-          let h = 5381;
-          for (let i=0;i<nick.length;i++) h = ((h << 5) + h) + nick.charCodeAt(i);
-          h = Math.abs(h) % 360;
-          return `hsl(${h} 70% 45%)`;
-        }
-
-        function getSort() {
-          const v = localStorage.getItem(SORT_KEY);
-          return v === 'asc' ? 'asc' : 'desc';
-        }
-        function setSort(v) {
-          try { localStorage.setItem(SORT_KEY, v); } catch(e) {}
-        }
-
-        let editingId = null;
-
-        function renderComments() {
-          const order = sortSelect.value;
-          const comments = loadComments().sort((a,b)=> order === 'asc' ? a.ts - b.ts : b.ts - a.ts);
-          listEl.innerHTML = '';
-          if (comments.length === 0) return;
-
-          const now = Date.now();
-
-          for (const c of comments) {
-            const li = document.createElement('li');
-            li.className = 'comment';
-            li.dataset.id = c.id || '';
-            const when = new Date(c.ts);
-            const dateText = when.toLocaleString(undefined, { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
-            const isOwner = c.clientId && c.clientId === clientId;
-            const canEdit = isOwner && (now - c.ts) <= EDIT_WINDOW_MS;
-
-            const head = document.createElement('div');
-            head.className = 'comment-head';
-
-            const left = document.createElement('div');
-            left.className = 'left-head';
-            const ava = document.createElement('div');
-            ava.className = 'avatar';
-            ava.textContent = initialsFromNick(c.nick || '');
-            ava.style.backgroundColor = colorFromNick(c.nick || 'vex');
-            const meta = document.createElement('div');
-            meta.className = 'meta';
-            const nickSpan = document.createElement('span');
-            nickSpan.className = 'nick';
-            nickSpan.textContent = c.nick;
-            const timeEl = document.createElement('time');
-            timeEl.setAttribute('datetime', when.toISOString());
-            timeEl.textContent = dateText;
-            meta.appendChild(nickSpan);
-            meta.appendChild(timeEl);
-            if (c.edited) {
-              const badge = document.createElement('span');
-              badge.className = 'badge-edited';
-              badge.textContent = 'edytowano';
-              meta.appendChild(badge);
-            }
-            left.appendChild(ava);
-            left.appendChild(meta);
-
-            const actions = document.createElement('div');
-            actions.className = 'comment-actions';
-            if (isOwner) {
-              if (canEdit) {
-                const editBtn = document.createElement('button');
-                editBtn.type = 'button';
-                editBtn.className = 'action-btn edit-btn';
-                editBtn.dataset.id = c.id;
-                editBtn.textContent = '✏️ Edytuj';
-                actions.appendChild(editBtn);
-              }
-              const delBtn = document.createElement('button');
-              delBtn.type = 'button';
-              delBtn.className = 'action-btn delete-btn';
-              delBtn.dataset.id = c.id;
-              delBtn.textContent = '🗑️ Usuń';
-              actions.appendChild(delBtn);
-            }
-
-            head.appendChild(left);
-            head.appendChild(actions);
-
-            const body = document.createElement('div');
-            body.className = 'comment-body';
-            body.textContent = c.text;
-
-            li.appendChild(head);
-            li.appendChild(body);
-            listEl.appendChild(li);
-          }
-        }
-
-        function setMsg(text, ok=false) {
-          if (!msgEl) return;
-          msgEl.textContent = text || '';
-          msgEl.style.color = ok ? 'var(--accent-strong)' : 'var(--muted)';
-        }
-
-        function getLastTs() {
-          const v = parseInt(localStorage.getItem(LAST_TS_KEY) || '0', 10);
-          return isNaN(v) ? 0 : v;
-        }
-        function setLastTs(ts) {
-          try { localStorage.setItem(LAST_TS_KEY, String(ts)); } catch(e) {}
-        }
-
-        function msToHHMM(ms) {
-          const totalSec = Math.max(0, Math.ceil(ms/1000));
-          const h = Math.floor(totalSec/3600);
-          const m = Math.floor((totalSec%3600)/60);
-          const s = totalSec%60;
-          const hh = h.toString();
-          const mm = m.toString().padStart(2,'0');
-          const ss = s.toString().padStart(2,'0');
-          return {h, m, s, text: (h>0 ? `${hh}h ${mm}m` : `${mm}m ${ss}s`)};
-        }
-
-        function updateCooldownUI() {
-          const last = getLastTs();
-          const now = Date.now();
-          const left = last + COOLDOWN_MS - now;
-          if (left > 0) {
-            publishBtn.disabled = true;
-            const t = msToHHMM(left);
-            setMsg(`Cooldown: możesz dodać kolejny komentarz za ${t.text}.`);
-          } else {
-            publishBtn.disabled = false;
-            if (!editingId) setMsg('');
-          }
-        }
-
-        // licznik znaków
-        function updateCounter() {
-          const len = (commentEl.value || '').length;
-          if (counterEl) counterEl.textContent = `${len.toLocaleString()} / 10 000`;
-        }
-        commentEl.addEventListener('input', updateCounter);
-
-        // Interwał cooldownu
-        updateCooldownUI();
-        const cdTimer = setInterval(updateCooldownUI, 1000 * 30);
-
-        // Inicjalizacja sortowania
-        sortSelect.value = getSort();
-        sortSelect.addEventListener('change', () => {
-          setSort(sortSelect.value);
-          renderComments();
-        });
-
-        // Delegacja: usuwanie + edycja
-        listEl.addEventListener('click', (e) => {
-          const delBtn = e.target.closest('.delete-btn');
-          const editBtn = e.target.closest('.edit-btn');
-          const saveBtn = e.target.closest('.save-btn');
-          const cancelBtn = e.target.closest('.cancel-btn');
-
-          if (delBtn) {
-            const id = delBtn.getAttribute('data-id');
-            if (!id) return;
-            const comments = loadComments();
-            const item = comments.find(c => c.id === id);
-            if (!item || item.clientId !== clientId) return;
-            if (!confirm('Na pewno usunąć ten komentarz?')) return;
-            saveComments(comments.filter(c => c.id !== id));
-            renderComments();
-            setMsg('Usunięto komentarz.', true);
-            return;
-          }
-
-          if (editBtn) {
-            const id = editBtn.getAttribute('data-id');
-            if (!id) return;
-            const comments = loadComments();
-            const item = comments.find(c => c.id === id);
-            if (!item || item.clientId !== clientId) return;
-            // sprawdź okno 15 min
-            if (Date.now() - item.ts > EDIT_WINDOW_MS) {
-              setMsg('Edycja możliwa tylko przez 15 minut od publikacji.');
-              renderComments();
-              return;
-            }
-            if (editingId && editingId !== id) renderComments();
-            editingId = id;
-
-            const li = listEl.querySelector(`.comment[data-id="${id}"]`);
-            if (!li) return;
-            const body = li.querySelector('.comment-body');
-            const actions = li.querySelector('.comment-actions');
-            if (body) {
-              const currentText = body.textContent || '';
-              body.innerHTML = `
-                <div class="edit-area">
-                  <textarea class="edit-textarea" maxlength="10000">${currentText.replace(/</g,'&lt;')}</textarea>
-                  <div class="edit-actions">
-                    <button type="button" class="action-btn save-btn" data-id="${id}">💾 Zapisz</button>
-                    <button type="button" class="action-btn cancel-btn" data-id="${id}">✖️ Anuluj</button>
-                    <span class="helper" style="color:var(--muted);font-size:.9rem;">Skrót: Ctrl+Enter = Zapisz</span>
-                  </div>
-                </div>
-              `;
-              if (actions) {
-                const eb = actions.querySelector('.edit-btn');
-                if (eb) eb.setAttribute('disabled','true');
-              }
-              const ta = li.querySelector('.edit-textarea');
-              if (ta) {
-                ta.focus();
-                ta.addEventListener('keydown', (ke) => {
-                  if ((ke.ctrlKey || ke.metaKey) && ke.key === 'Enter') {
-                    const saveB = li.querySelector('.save-btn');
-                    if (saveB) saveB.click();
-                  }
-                });
-              }
-              setMsg('Edytujesz komentarz — zapisz lub anuluj.');
-            }
-            return;
-          }
-
-          if (saveBtn) {
-            const id = saveBtn.getAttribute('data-id');
-            const comments = loadComments();
-            const idx = comments.findIndex(c => c.id === id);
-            if (idx === -1) return;
-            if (comments[idx].clientId !== clientId) return;
-            // sprawdź okno 15 min
-            if (Date.now() - comments[idx].ts > EDIT_WINDOW_MS) {
-              editingId = null;
-              setMsg('Minęło 15 minut — edycja niedostępna.');
-              renderComments();
-              return;
-            }
-            const li = listEl.querySelector(`.comment[data-id="${id}"]`);
-            const ta = li ? li.querySelector('.edit-textarea') : null;
-            if (!ta) return;
-            const newText = (ta.value || '').trim();
-            if (newText.length < 3) { setMsg('Komentarz powinien mieć min. 3 znaki.'); ta.focus(); return; }
-            if (newText.length > MAX_LEN) { setMsg('Za długi komentarz.'); ta.focus(); return; }
-
-            comments[idx].text = newText;
-            comments[idx].edited = true;
-            comments[idx].editedTs = Date.now();
-            saveComments(comments);
-            editingId = null;
-            renderComments();
-            setMsg('Zaktualizowano komentarz ✅', true);
-            return;
-          }
-
-          if (cancelBtn) {
-            editingId = null;
-            renderComments();
-            setMsg('');
-            return;
-          }
-        });
-
-        // Dodawanie komentarza
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-
-          const last = getLastTs();
-          const now = Date.now();
-          const left = last + COOLDOWN_MS - now;
-          if (left > 0) {
-            const t = msToHHMM(left);
-            setMsg(`Cooldown: możesz dodać kolejny komentarz za ${t.text}.`);
-            return;
-          }
-
-          const nick = (nickEl.value || '').trim();
-          const text = (commentEl.value || '').trim();
-
-          if (nick.length < 2) { setMsg('Nick powinien mieć min. 2 znaki.'); nickEl.focus(); return; }
-          if (text.length < 3) { setMsg('Komentarz powinien mieć min. 3 znaki.'); commentEl.focus(); return; }
-          if (text.length > MAX_LEN) { setMsg('Za długi komentarz.'); commentEl.focus(); return; }
-
-          const comments = loadComments();
-          comments.push({ id: uuid(), clientId, nick, text, ts: now });
-          saveComments(comments);
-          setLastTs(now);
-          renderComments();
-          form.reset();
-          updateCounter();
-          setMsg('Opublikowano! 💬', true);
-          updateCooldownUI();
-        });
-
-        // start
-        updateCounter();
-        renderComments();
-
         // Reaguj na zmianę preferencji systemowych, jeśli brak własnego wyboru
         if (window.matchMedia) {
           const media = window.matchMedia('(prefers-color-scheme: dark)');
           if (media.addEventListener) {
             media.addEventListener('change', (e) => {
-              if (!localStorage.getItem(storageKey)) {
+              if (!getStoredTheme()) {
                 applyTheme(e.matches ? 'dark' : 'light');
               }
             });
