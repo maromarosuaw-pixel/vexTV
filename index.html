@@ -211,7 +211,7 @@
 
   <div class="container">
     <header>
-      <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
+      <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓨</h1>
 
       <!-- Intro pod tytułem -->
       <p id="introText" class="fancy-intro">Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!</p>
@@ -251,7 +251,6 @@
             <span class="value" aria-live="polite">2 / 1000</span>
           </div>
 
-          <!-- Tekst nad paskiem -->
           <p id="goalIntro" class="goal-intro">Razem dążymy do 1000 subów na YouTube! 🎉</p>
 
           <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="2">
@@ -291,8 +290,10 @@
                href="https://youtube.com/@vextv-f8b?si=MYVJGZAAMCjPPIl4"
                target="_blank" rel="noopener"
                aria-label="Subskrybuj kanał VexTV na YouTube">
+              <!-- Poprawione SVG: czerwone tło + biały trójkąt -->
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5В8.5l6.4 3.5-6.4 3.5z"/>
+                <path fill="#ff1f4a" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4 4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8z"/>
+                <path fill="#ffffff" d="M9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
               </svg>
               <span id="ytBtnText">Subskrybuj na YouTube</span>
             </a>
@@ -602,6 +603,8 @@
         updateToggleButton(currentTheme);
       }
 
+      const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
       document.addEventListener('DOMContentLoaded', () => {
         // Ustal motyw startowy
         const initialTheme = localStorage.getItem(storageKeyTheme) || (prefersDark() ? 'dark' : 'light');
@@ -650,7 +653,6 @@
         function openLangPanel() {
           langPanel.hidden = false;
           langToggle.setAttribute('aria-expanded', 'true');
-          // fokus na aktualnie wybraną opcję
           const current = langPanel.querySelector('.lang-option[aria-checked="true"]');
           current?.focus();
         }
@@ -685,7 +687,7 @@
           if (!isInside) closeLangPanel();
         });
 
-        // Helper do sprawdzania, czy użytkownik pisze (nie blokuj skrótów)
+        // Helper do sprawdzania, czy użytkownik pisze
         function isTypingTarget(el) {
           if (!el) return false;
           const tag = el.tagName?.toLowerCase();
@@ -693,11 +695,10 @@
           return editable || tag === 'input' || tag === 'textarea' || tag === 'select';
         }
 
-        // Skróty klawiaturowe: L - język, T - motyw, Esc - zamyka panel
+        // Skróty: L — język, T — motyw, Esc — zamyka panel
         document.addEventListener('keydown', (e) => {
           const key = e.key.toLowerCase();
 
-          // ESC zamyka panel
           if (key === 'escape') {
             if (langPanel && !langPanel.hidden) {
               e.preventDefault();
@@ -706,17 +707,14 @@
             return;
           }
 
-          // Nie wywołuj skrótów podczas pisania w polach
           if (isTypingTarget(e.target)) return;
 
-          // L: przełącz panel języka
           if (key === 'l') {
             e.preventDefault();
             toggleLangPanel();
             return;
           }
 
-          // T: przełącz motyw
           if (key === 't') {
             e.preventDefault();
             const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
