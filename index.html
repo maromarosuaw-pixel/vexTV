@@ -211,7 +211,7 @@
 
   <div class="container">
     <header>
-      <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓨</h1>
+      <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
 
       <!-- Intro pod tytułem -->
       <p id="introText" class="fancy-intro">Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!</p>
@@ -602,8 +602,6 @@
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
         updateToggleButton(currentTheme);
       }
-
-      const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       document.addEventListener('DOMContentLoaded', () => {
         // Ustal motyw startowy
