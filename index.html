@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rodzinka Furaska Vexa</title>
-  <meta name="description" content="Witamy w rodzince Furaska Vexa — rozgość się i sprawdź co dla Ciebie przygotowaliśmy." />
+  <meta name="description" content="Witamy w rodzince Furaska Vexa — rozgość się i sprawdź, co dla Ciebie przygotowaliśmy." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -153,6 +153,35 @@
     }
     .theme-toggle:hover { transform: translateY(-1px); background: var(--btn-bg-hover); border-color: var(--btn-border-hover); box-shadow: var(--btn-shadow-hover); }
     .theme-toggle:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+
+    /* Language switcher */
+    [hidden] { display: none !important; }
+    .lang-toggle {
+      position: fixed; left: 16px; z-index: 101; top: 16px;
+      padding: 10px 14px; border-radius: 999px;
+      background: var(--btn-bg); border: 1px solid var(--btn-border); color: var(--accent-strong);
+      font-weight: 700; box-shadow: var(--btn-shadow); cursor: pointer;
+      transition: transform .15s, background-color .2s, box-shadow .2s, border-color .2s, color .2s;
+    }
+    .lang-toggle:hover { transform: translateY(-1px); background: var(--btn-bg-hover); border-color: var(--btn-border-hover); box-shadow: var(--btn-shadow-hover); }
+    .lang-toggle:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+
+    .lang-panel {
+      position: fixed; left: 16px; top: 62px; z-index: 101;
+      min-width: 200px; padding: 8px;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 0 22px rgba(126,92,255,.10);
+      display: grid; gap: 6px;
+    }
+    .lang-option {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 10px 12px; border: 1px solid transparent; border-radius: 10px;
+      background: transparent; color: var(--text); font-weight: 700; cursor: pointer;
+      transition: background-color .2s, border-color .2s, transform .15s;
+    }
+    .lang-option:hover { background: var(--btn-bg-hover); border-color: var(--btn-border-hover); }
+    .lang-option[aria-checked="true"] { border-color: var(--btn-border-hover); background: var(--btn-bg); }
   </style>
 </head>
 <body>
@@ -168,35 +197,44 @@
     <svg viewBox="0 0 24 24" style="--x: 90%; --size: 46px; --scale: 1.15;--dur: 42s; --delay: -22s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
   </div>
 
-  <!-- Przełącznik motywu -->
+  <!-- Przełącznik języka (lewy górny róg) -->
+  <button id="langToggle" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Zmień język">🌐 PL</button>
+  <div id="langPanel" class="lang-panel" role="menu" aria-labelledby="langToggle" hidden>
+    <button class="lang-option" data-lang="pl" role="menuitemradio" aria-checked="true">🇵🇱 Polski</button>
+    <button class="lang-option" data-lang="en" role="menuitemradio" aria-checked="false">🇬🇧 English</button>
+    <button class="lang-option" data-lang="ru" role="menuitemradio" aria-checked="false">🇷🇺 Русский</button>
+    <button class="lang-option" data-lang="ja" role="menuitemradio" aria-checked="false">🇯🇵 日本語</button>
+  </div>
+
+  <!-- Przełącznik motywu (prawy górny róg) -->
   <button id="themeToggle" class="theme-toggle" type="button" aria-label="Przełącz na ciemny motyw" aria-pressed="false">🌙 Ciemny</button>
 
   <div class="container">
     <header>
-      <h1>𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
+      <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
 
-      <!-- Zmienione intro pod tytułem -->
-      <p class="fancy-intro">Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!</p>
+      <!-- Intro pod tytułem -->
+      <p id="introText" class="fancy-intro">Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!</p>
 
       <div class="video hero-video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/pos632jmaNE?si=DGikv9cLFB1caLDC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe id="ytIframe" width="560" height="315" src="https://www.youtube.com/embed/pos632jmaNE?si=DGikv9cLFB1caLDC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
 
-      <div class="subtitle">Miło, że wpadłeś/aś! Rozgość się ☺️</div>
+      <div id="subtitleText" class="subtitle">Miło, że wpadłeś/aś! Rozgość się ☺️</div>
     </header>
 
     <main>
       <!-- Sekcja powitalna -->
       <section class="card content">
-        <p>Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:</p>
+        <p id="welcomeText">Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:</p>
         <p>
-          <a class="btn" href="https://tipply.pl/@VexTV" target="_blank" rel="noopener">❤️ Wesprzyj mnie na Tipply</a>
+          <a id="supportBtn" class="btn" href="https://tipply.pl/@VexTV" target="_blank" rel="noopener">❤️ Wesprzyj mnie na Tipply</a>
         </p>
 
         <div class="info">
-          <p>Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.</p>
-          <p>Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️</p>
-          <p>W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.</p>
+          <p id="infoText1">Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.</p>
+          <p id="infoText2">Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️</p>
+          <p id="infoText3">W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.</p>
         </div>
       </section>
 
@@ -209,12 +247,12 @@
             <span class="icon youtube" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/></svg>
             </span>
-            <span class="label">Cel subskrypcji — <strong>1000</strong></span>
+            <span id="goalLabel" class="label">Cel subskrypcji — <strong>1000</strong></span>
             <span class="value" aria-live="polite">2 / 1000</span>
           </div>
 
-          <!-- Nowy tekst nad paskiem -->
-          <p class="goal-intro">Razem dążymy do 1000 subów na YouTube! 🎉</p>
+          <!-- Tekst nad paskiem -->
+          <p id="goalIntro" class="goal-intro">Razem dążymy do 1000 subów na YouTube! 🎉</p>
 
           <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="2">
             <span class="bar"></span>
@@ -224,21 +262,21 @@
         <ul class="list" role="list">
           <li class="item">
             <span class="icon discord" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.207.363-.444.84-.608 1.215a17.456 17.456 0 00-5.9 0C9.888 3.84 9.65 3.363 9.443 3a19.736 19.736 0 00-3.76 1.37C2.256 9.099 1.385 13.63 1.742 18.108A19.8 19.8 0 007.58 21c.3-.41.565-.847.79-1.305a12.91 12.91 0 01-1.247-.592l.302-.237a14.2 14.2 0 009.13 0l.304.237c-.41.2-.83.41-1.25.59.23.46.49.9.79 1.31a19.76 19.76 0 005.84-2.89c.47-5.54-.8-10.02-2.87-13.74zM9.347 15.5c-1.1 0-2.002-1.01-2.002-2.255 0-1.245.89-2.255 2.002-2.255 1.123 0 2.015 1.01 2.015 2.255 0 1.245-.902 2.255-2.015 2.255zm5.306 0c-1.1 0-2.003-1.01-2.003-2.255 0-1.245.89-2.255 2.003-2.255 1.122 0 2.015 1.01 2.015 2.255 0 1.245-.893 2.255-2.015 2.255z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.207.363-.444.84-.608 1.215a17.456 17.456 0 00-5.9 0C9.888 3.84 9.65 3.363 9.443 3a19.736 19.736 0 00-3.76 1.37C2.256 9.099 1.385 13.63 1.742 18.108A19.8 19.8 0 007.58 21c.3-.41.565-.847.79-1.305a12.91 12.91 0 01-1.247-.592l.302-.237a14.2 14.2 0 009.13 0l.304.237c-.41 .2-.83 .41-1.25 .59.23 .46 .49 .9 .79 1.31a19.76 19.76 0 005.84-2.89c.47-5.54-.8-10.02-2.87-13.74zM9.347 15.5c-1.1 0-2.002-1.01-2.002-2.255 0-1.245.89-2.255 2.002-2.255 1.123 0 2.015 1.01 2.015 2.255 0 1.245-.902 2.255-2.015 2.255zm5.306 0c-1.1 0-2.003-1.01-2.003-2.255 0-1.245.89-2.255 2.003-2.255 1.122 0 2.015 1.01 2.015 2.255 0 1.245-.893 2.255-2.015 2.255z"/></svg>
             </span>
-            <span>Serwer Discord już wkrótce!</span>
+            <span id="discordSoon">Serwer Discord już wkrótce!</span>
           </li>
           <li class="item">
             <span class="icon instagram" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm0 2.2a2.8 2.8 0 100 5.6 2.8 2.8 0 000-5.6z"/></svg>
             </span>
-            <span>Instagram Furaska – startuje niebawem!</span>
+            <span id="instaSoon">Instagram Furaska – startuje niebawem!</span>
           </li>
           <li class="item">
             <span class="icon info" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 110 20 10 10 0 010-20zm1 5h-2v2h2V7zm0 4h-2v7h2v-7z"/></svg>
             </span>
-            <span>Będę na bieżąco wrzucał nowe informacje.</span>
+            <span id="moreInfoNote">Będę na bieżąco wrzucał nowe informacje.</span>
           </li>
         </ul>
       </section>
@@ -247,16 +285,16 @@
 
       <footer>
         <div class="socials">
-          <p>Znajdziesz mnie też tutaj:</p>
+          <p id="findMeText">Znajdziesz mnie też tutaj:</p>
           <p>
-            <a class="btn social-btn btn--youtube"
+            <a id="ytLink" class="btn social-btn btn--youtube"
                href="https://youtube.com/@vextv-f8b?si=MYVJGZAAMCjPPIl4"
                target="_blank" rel="noopener"
                aria-label="Subskrybuj kanał VexTV na YouTube">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
+                <path fill="currentColor" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4  4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8zM9.8 15.5В8.5l6.4 3.5-6.4 3.5z"/>
               </svg>
-              Subskrybuj na YouTube
+              <span id="ytBtnText">Subskrybuj na YouTube</span>
             </a>
           </p>
         </div>
@@ -265,7 +303,7 @@
       <!-- KOMENTARZE (Utterances) -->
       <section id="comments-section" class="card comments" aria-labelledby="comments-title">
         <h2 id="comments-title">Komentarze</h2>
-        <p class="helper">Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3</p>
+        <p id="commentsHelper" class="helper">Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3</p>
 
         <script src="https://utteranc.es/client.js"
                 repo="maromarosuaw-pixel/vexTV"
@@ -281,28 +319,188 @@
 
   <script>
     (function() {
-      const storageKey = 'theme';
-      const getStoredTheme = () => localStorage.getItem(storageKey);
+      const storageKeyTheme = 'theme';
+      const storageKeyLang = 'site-lang';
+      const supportedLangs = ['pl', 'en', 'ru', 'ja'];
+
+      const I18N = {
+        pl: {
+          title: 'Rodzinka Furaska Vexa',
+          description: 'Witamy w rodzince Furaska Vexa — rozgość się i sprawdź, co dla Ciebie przygotowaliśmy.',
+          heroTitle: '𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐',
+
+          changeLanguageLabel: 'Zmień język',
+          themeDarkBtn: 'Ciemny',
+          themeLightBtn: 'Jasny',
+          themeDarkLabel: 'Przełącz na ciemny motyw',
+          themeLightLabel: 'Przełącz na jasny motyw',
+          ytIframeTitle: 'Odtwarzacz wideo YouTube',
+
+          introText: 'Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!',
+          subtitleText: 'Miło, że wpadłeś/aś! Rozgość się ☺️',
+          welcomeText: 'Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:',
+          supportBtn: '❤️ Wesprzyj mnie na Tipply',
+          info1: 'Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.',
+          info2: 'Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️',
+          info3: 'W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.',
+
+          updatesTitle: 'Aktualne informacje',
+          goalLabel: 'Cel subskrypcji — <strong>{n}</strong>',
+          goalAriaLabel: 'Cel subskrypcji {n}',
+          goalIntro: 'Razem dążymy do {n} subów na YouTube! 🎉',
+
+          discordSoon: 'Serwer Discord już wkrótce!',
+          instaSoon: 'Instagram Furaska – startuje niebawem!',
+          moreInfoNote: 'Będę na bieżąco wrzucał nowe informacje.',
+
+          findMeText: 'Znajdziesz mnie też tutaj:',
+          ytBtnText: 'Subskrybuj na YouTube',
+          ytAriaLabel: 'Subskrybuj kanał VexTV na YouTube',
+
+          commentsTitle: 'Komentarze',
+          commentsHelper: 'Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3'
+        },
+        en: {
+          title: 'Furaska Vexa Family',
+          description: 'Welcome to the Furaska Vexa family — make yourself at home and see what we’ve prepared for you.',
+          heroTitle: 'WELCOME TO THE FURASKA VEXA FAMILY',
+
+          changeLanguageLabel: 'Change language',
+          themeDarkBtn: 'Dark',
+          themeLightBtn: 'Light',
+          themeDarkLabel: 'Switch to dark theme',
+          themeLightLabel: 'Switch to light theme',
+          ytIframeTitle: 'YouTube video player',
+
+          introText: 'Thanks for stopping by! Make yourself at home and see what I’ve prepared. Enjoy browsing!',
+          subtitleText: 'Glad you’re here! Make yourself comfortable ☺️',
+          welcomeText: 'Hey! Welcome to my website. This is a place where you can feel at home. If you like my projects and want to support me, you can do it here:',
+          supportBtn: '❤️ Support me on Tipply',
+          info1: 'I want you to feel at home 🏠 That’s why I’m inviting you to my YouTube channel too — you’ll find the link at the bottom of the page.',
+          info2: 'Together we can build a community that means a lot to me. I’ll do my best for you ❤️',
+          info3: 'In this section I’ll post the most important info and updates.',
+
+          updatesTitle: 'Latest updates',
+          goalLabel: 'Subscription goal — <strong>{n}</strong>',
+          goalAriaLabel: 'Subscription goal {n}',
+          goalIntro: 'Together we’re aiming for {n} subs on YouTube! 🎉',
+
+          discordSoon: 'Discord server coming soon!',
+          instaSoon: 'Furaska’s Instagram — launching soon!',
+          moreInfoNote: 'I’ll keep posting new information.',
+
+          findMeText: 'Find me here too:',
+          ytBtnText: 'Subscribe on YouTube',
+          ytAriaLabel: 'Subscribe to the VexTV channel on YouTube',
+
+          commentsTitle: 'Comments',
+          commentsHelper: 'If you like this site, leave a comment and tell me what you think. Have a nice day! :3'
+        },
+        ru: {
+          title: 'Семья Фураски Векса',
+          description: 'Добро пожаловать в семью Фураски Векса — располагайтесь и посмотрите, что мы для вас приготовили.',
+          heroTitle: 'ДОБРО ПОЖАЛОВАТЬ В СЕМЬЮ ФУРАСКИ ВЕКСА',
+
+          changeLanguageLabel: 'Сменить язык',
+          themeDarkBtn: 'Тёмная',
+          themeLightBtn: 'Светлая',
+          themeDarkLabel: 'Переключить на тёмную тему',
+          themeLightLabel: 'Переключить на светлую тему',
+          ytIframeTitle: 'Видеоплеер YouTube',
+
+          introText: 'Спасибо, что заглянул(а)! Чувствуй себя как дома и посмотри, что я подготовил. Приятного просмотра!',
+          subtitleText: 'Рад(а) тебя видеть! Устраивайся поудобнее ☺️',
+          welcomeText: 'Привет! Добро пожаловать на мой сайт. Здесь можно чувствовать себя как дома. Если тебе нравятся мои проекты и ты хочешь меня поддержать, можно сделать это здесь:',
+          supportBtn: '❤️ Поддержать меня на Tipply',
+          info1: 'Хочу, чтобы вы чувствовали себя как дома 🏠 Поэтому приглашаю и на мой YouTube‑канал — ссылка внизу страницы.',
+          info2: 'Вместе мы можем создать важное для меня сообщество. Я постараюсь быть для вас как можно лучше ❤️',
+          info3: 'В этом разделе я буду добавлять самую важную информацию и обновления.',
+
+          updatesTitle: 'Актуальная информация',
+          goalLabel: 'Цель по подпискам — <strong>{n}</strong>',
+          goalAriaLabel: 'Цель по подпискам {n}',
+          goalIntro: 'Вместе стремимся к {n} подписчикам на YouTube! 🎉',
+
+          discordSoon: 'Сервер Discord скоро!',
+          instaSoon: 'Instagram Furaska — скоро стартует!',
+          moreInfoNote: 'Буду регулярно публиковать новую информацию.',
+
+          findMeText: 'Меня можно найти и здесь:',
+          ytBtnText: 'Подпишись на YouTube',
+          ytAriaLabel: 'Подпишись на канал VexTV на YouTube',
+
+          commentsTitle: 'Комментарии',
+          commentsHelper: 'Если тебе нравится этот сайт, оставь комментарий и расскажи, что думаешь. Хорошего дня! :3'
+        },
+        ja: {
+          title: 'Furaska Vexa ファミリー',
+          description: 'Furaska Vexa ファミリーへようこそ。ゆっくりして、用意したコンテンツを楽しんでね。',
+          heroTitle: 'FURASKA VEXA ファミリーへようこそ',
+
+          changeLanguageLabel: '言語を変更',
+          themeDarkBtn: 'ダーク',
+          themeLightBtn: 'ライト',
+          themeDarkLabel: 'ダークテーマに切り替え',
+          themeLightLabel: 'ライトテーマに切り替え',
+          ytIframeTitle: 'YouTube 動画プレーヤー',
+
+          introText: '来てくれてありがとう！ゆっくりして、用意したコンテンツを見ていってね。楽しんで！',
+          subtitleText: '来てくれて嬉しいよ！ごゆっくりどうぞ ☺️',
+          welcomeText: 'やあ！僕のサイトへようこそ。ここは家のようにくつろげる場所だよ。もし僕のプロジェクトが気に入ったら、ここから応援してね：',
+          supportBtn: '❤️ Tipplyで応援する',
+          info1: 'ここを家のように感じてほしい 🏠 YouTubeチャンネルにもぜひ。リンクはページ下部にあるよ。',
+          info2: 'みんなで僕にとって大切なコミュニティを作ろう。みんなのために全力を尽くすよ ❤️',
+          info3: 'このセクションでは重要なお知らせや更新情報を載せるよ。',
+
+          updatesTitle: '最新情報',
+          goalLabel: '登録目標 — <strong>{n}</strong>',
+          goalAriaLabel: '登録目標 {n}',
+          goalIntro: 'みんなでYouTubeの登録者{n}人を目指そう！🎉',
+
+          discordSoon: 'Discordサーバーは近日公開！',
+          instaSoon: 'FuraskaのInstagram — もうすぐ始動！',
+          moreInfoNote: '新しい情報を随時更新していくよ。',
+
+          findMeText: 'こちらでも見つけてね：',
+          ytBtnText: 'YouTubeをチャンネル登録',
+          ytAriaLabel: 'YouTubeでVexTVをチャンネル登録',
+
+          commentsTitle: 'コメント',
+          commentsHelper: 'このサイトが気に入ったら、コメントで感想を教えてね。良い一日を！:3'
+        }
+      };
+
       const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function getLang() {
+        const saved = localStorage.getItem(storageKeyLang);
+        if (saved && supportedLangs.includes(saved)) return saved;
+        const browser = (navigator.language || 'pl').slice(0,2).toLowerCase();
+        return supportedLangs.includes(browser) ? browser : 'pl';
+      }
 
       function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         updateToggleButton(theme);
         setUtterancesTheme(theme);
       }
+
       function updateToggleButton(theme) {
         const btn = document.getElementById('themeToggle');
         if (!btn) return;
+        const lang = document.documentElement.lang || 'pl';
+        const t = I18N[lang] || I18N.pl;
         if (theme === 'dark') {
-          btn.innerHTML = '☀️ Jasny';
-          btn.setAttribute('aria-label', 'Przełącz na jasny motyw');
+          btn.innerHTML = '☀️ ' + t.themeLightBtn;
+          btn.setAttribute('aria-label', t.themeLightLabel);
           btn.setAttribute('aria-pressed', 'true');
         } else {
-          btn.innerHTML = '🌙 Ciemny';
-          btn.setAttribute('aria-label', 'Przełącz na ciemny motyw');
+          btn.innerHTML = '🌙 ' + t.themeDarkBtn;
+          btn.setAttribute('aria-label', t.themeDarkLabel);
           btn.setAttribute('aria-pressed', 'false');
         }
       }
+
       function setUtterancesTheme(theme) {
         const frame = document.querySelector('.utterances-frame');
         if (!frame) return;
@@ -312,15 +510,112 @@
         );
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const initial = getStoredTheme() || (prefersDark() ? 'dark' : 'light');
-        applyTheme(initial);
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el && typeof value === 'string') {
+          el.innerHTML = value;
+        }
+      }
 
-        // przełącznik motywu
+      function updateLangPanelSelection(lang) {
+        document.querySelectorAll('.lang-option').forEach(btn => {
+          btn.setAttribute('aria-checked', String(btn.dataset.lang === lang));
+        });
+      }
+
+      function applyGoalI18n(lang) {
+        const t = I18N[lang] || I18N.pl;
+        const goal = document.querySelector('.updates .goal'); if (!goal) return;
+        const target  = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
+
+        const label = document.getElementById('goalLabel');
+        if (label) label.innerHTML = t.goalLabel.replace('{n}', target);
+
+        const intro = document.getElementById('goalIntro');
+        if (intro) intro.innerHTML = t.goalIntro.replace('{n}', target);
+
+        goal.setAttribute('aria-label', t.goalAriaLabel.replace('{n}', target));
+      }
+
+      function applyPageMeta(lang) {
+        const t = I18N[lang] || I18N.pl;
+        document.title = t.title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', t.description);
+      }
+
+      function applyLanguage(lang) {
+        if (!supportedLangs.includes(lang)) lang = 'pl';
+        localStorage.setItem(storageKeyLang, lang);
+        document.documentElement.setAttribute('lang', lang);
+
+        const t = I18N[lang] || I18N.pl;
+
+        // <title> i <meta name="description">
+        applyPageMeta(lang);
+
+        // H1 + główne teksty
+        setText('heroTitle', t.heroTitle);
+        setText('introText', t.introText);
+        setText('subtitleText', t.subtitleText);
+        setText('welcomeText', t.welcomeText);
+        setText('supportBtn', t.supportBtn);
+        setText('infoText1', t.info1);
+        setText('infoText2', t.info2);
+        setText('infoText3', t.info3);
+
+        // Sekcja aktualności i cel
+        setText('updates-title', t.updatesTitle);
+        applyGoalI18n(lang);
+
+        // Lista info
+        setText('discordSoon', t.discordSoon);
+        setText('instaSoon', t.instaSoon);
+        setText('moreInfoNote', t.moreInfoNote);
+
+        // Stopka i przyciski
+        setText('findMeText', t.findMeText);
+        setText('ytBtnText', t.ytBtnText);
+
+        const ytLink = document.getElementById('ytLink');
+        if (ytLink) ytLink.setAttribute('aria-label', t.ytAriaLabel);
+
+        // Iframe tytuł
+        const ytIframe = document.getElementById('ytIframe');
+        if (ytIframe) ytIframe.setAttribute('title', t.ytIframeTitle);
+
+        // Komentarze
+        setText('comments-title', t.commentsTitle);
+        setText('commentsHelper', t.commentsHelper);
+
+        // UI przełącznika języka
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+          langToggle.innerHTML = '🌐 ' + lang.toUpperCase();
+          langToggle.setAttribute('aria-label', t.changeLanguageLabel);
+        }
+
+        updateLangPanelSelection(lang);
+
+        // Zaktualizuj podpis przycisku motywu (zgodnie z językiem)
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        updateToggleButton(currentTheme);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Ustal motyw startowy
+        const initialTheme = localStorage.getItem(storageKeyTheme) || (prefersDark() ? 'dark' : 'light');
+        applyTheme(initialTheme);
+
+        // Ustal język startowy
+        const initialLang = getLang();
+        applyLanguage(initialLang);
+
+        // Przełącznik motywu (klik)
         document.getElementById('themeToggle')?.addEventListener('click', () => {
           const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
           const next = cur === 'dark' ? 'light' : 'dark';
-          localStorage.setItem(storageKey, next);
+          localStorage.setItem(storageKeyTheme, next);
           applyTheme(next);
         });
 
@@ -347,6 +642,111 @@
             progressEl.setAttribute('aria-valuemax', target);
           }
         })();
+
+        // Panel języków
+        const langToggle = document.getElementById('langToggle');
+        const langPanel  = document.getElementById('langPanel');
+
+        function openLangPanel() {
+          langPanel.hidden = false;
+          langToggle.setAttribute('aria-expanded', 'true');
+          // fokus na aktualnie wybraną opcję
+          const current = langPanel.querySelector('.lang-option[aria-checked="true"]');
+          current?.focus();
+        }
+        function closeLangPanel() {
+          langPanel.hidden = true;
+          langToggle.setAttribute('aria-expanded', 'false');
+        }
+        function toggleLangPanel() {
+          if (langPanel.hidden) openLangPanel(); else closeLangPanel();
+        }
+
+        langToggle?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleLangPanel();
+        });
+
+        // Wybór języka
+        langPanel?.addEventListener('click', (e) => {
+          const btn = e.target.closest('.lang-option');
+          if (!btn) return;
+          const lang = btn.dataset.lang;
+          if (supportedLangs.includes(lang)) {
+            applyLanguage(lang);
+            closeLangPanel();
+          }
+        });
+
+        // Zamknij panel klikając poza nim
+        document.addEventListener('click', (e) => {
+          if (!langPanel || langPanel.hidden) return;
+          const isInside = e.target === langPanel || langPanel.contains(e.target) || e.target === langToggle;
+          if (!isInside) closeLangPanel();
+        });
+
+        // Helper do sprawdzania, czy użytkownik pisze (nie blokuj skrótów)
+        function isTypingTarget(el) {
+          if (!el) return false;
+          const tag = el.tagName?.toLowerCase();
+          const editable = el.isContentEditable || el.getAttribute?.('contenteditable') === 'true';
+          return editable || tag === 'input' || tag === 'textarea' || tag === 'select';
+        }
+
+        // Skróty klawiaturowe: L - język, T - motyw, Esc - zamyka panel
+        document.addEventListener('keydown', (e) => {
+          const key = e.key.toLowerCase();
+
+          // ESC zamyka panel
+          if (key === 'escape') {
+            if (langPanel && !langPanel.hidden) {
+              e.preventDefault();
+              closeLangPanel();
+            }
+            return;
+          }
+
+          // Nie wywołuj skrótów podczas pisania w polach
+          if (isTypingTarget(e.target)) return;
+
+          // L: przełącz panel języka
+          if (key === 'l') {
+            e.preventDefault();
+            toggleLangPanel();
+            return;
+          }
+
+          // T: przełącz motyw
+          if (key === 't') {
+            e.preventDefault();
+            const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const next = cur === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(storageKeyTheme, next);
+            applyTheme(next);
+            return;
+          }
+        });
+
+        // Strzałki i Enter/Spacja na panelu języka
+        document.addEventListener('keydown', (e) => {
+          if (!langPanel || langPanel.hidden) return;
+          const options = Array.from(langPanel.querySelectorAll('.lang-option'));
+          const activeIndex = options.findIndex(o => o.getAttribute('aria-checked') === 'true');
+
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            let next = activeIndex;
+            if (e.key === 'ArrowDown') next = (activeIndex + 1) % options.length;
+            if (e.key === 'ArrowUp') next = (activeIndex - 1 + options.length) % options.length;
+            options[next]?.focus();
+          }
+          if (e.key === 'Enter' || e.key === ' ') {
+            const focused = document.activeElement;
+            if (focused && focused.classList.contains('lang-option')) {
+              focused.click();
+            }
+          }
+        });
       });
     })();
   </script>
