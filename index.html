@@ -136,7 +136,6 @@
 
     .info { margin-top: 12px; padding-top: 8px; border-top: 1px dashed rgba(126,92,255,.25); color: var(--muted); }
 
-    /* Updates */
     .updates h2 { margin: 0 0 12px; font-size: clamp(18px, 2.6vw, 22px); color: var(--accent-strong); text-shadow: 0 0 12px rgba(126,92,255,.14); }
     .updates .goal .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
     .updates .goal .label strong { color: var(--accent-strong); }
@@ -174,7 +173,6 @@
     .theme-toggle:hover { transform: translateY(-1px); background: var(--btn-bg-hover); border-color: var(--btn-border-hover); box-shadow: var(--btn-shadow-hover); }
     .theme-toggle:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
 
-    /* Language switcher */
     [hidden] { display: none !important; }
     .lang-toggle {
       position: fixed; left: 16px; z-index: 101; top: 16px;
@@ -203,7 +201,7 @@
     .lang-option:hover { background: var(--btn-bg-hover); border-color: var(--btn-border-hover); }
     .lang-option[aria-checked="true"] { border-color: var(--btn-border-hover); background: var(--btn-bg); }
 
-    /* ====== KOMENTARZE FIREBASE ====== */
+    /* ====== KOMENTARZE ====== */
     .comments h2 {
       margin: 0 0 12px;
       font-size: clamp(18px, 2.6vw, 22px);
@@ -304,14 +302,8 @@
     }
 
     @keyframes commentSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .comment-item:hover {
@@ -443,7 +435,6 @@
   </style>
 </head>
 <body>
-  <!-- Latające serca (pod treścią) -->
   <div class="bg-hearts" aria-hidden="true">
     <svg viewBox="0 0 24 24" style="--x: 6%;  --size: 28px; --scale: 1;    --dur: 24s; --delay: -2s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 18%; --size: 44px; --scale: .9;  --dur: 38s; --delay: -18s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
@@ -455,7 +446,6 @@
     <svg viewBox="0 0 24 24" style="--x: 90%; --size: 46px; --scale: 1.15;--dur: 42s; --delay: -22s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
   </div>
 
-  <!-- Przełącznik języka (lewy górny róg) -->
   <button id="langToggle" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Zmień język">🌐 PL</button>
   <div id="langPanel" class="lang-panel" role="menu" aria-labelledby="langToggle" hidden>
     <button class="lang-option" data-lang="pl" role="menuitemradio" aria-checked="true">🇵🇱 Polski</button>
@@ -464,14 +454,11 @@
     <button class="lang-option" data-lang="ja" role="menuitemradio" aria-checked="false">🇯🇵 日本語</button>
   </div>
 
-  <!-- Przełącznik motywu (prawy górny róg) -->
   <button id="themeToggle" class="theme-toggle" type="button" aria-label="Przełącz na ciemny motyw" aria-pressed="false">🌙 Ciemny</button>
 
   <div class="container">
     <header>
       <h1 id="heroTitle">𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐</h1>
-
-      <!-- Intro pod tytułem -->
       <p id="introText" class="fancy-intro">Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!</p>
 
       <div class="video hero-video">
@@ -482,7 +469,6 @@
     </header>
 
     <main>
-      <!-- Sekcja powitalna -->
       <section class="card content">
         <p id="welcomeText">Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:</p>
         <p>
@@ -496,7 +482,6 @@
         </div>
       </section>
 
-      <!-- Aktualne informacje -->
       <section class="card updates" aria-labelledby="updates-title">
         <h2 id="updates-title">Aktualne informacje</h2>
 
@@ -548,7 +533,6 @@
                href="https://youtube.com/@vextv-f8b?si=MYVJGZAAMCjPPIl4"
                target="_blank" rel="noopener"
                aria-label="Subskrybuj kanał VexTV na YouTube">
-              <!-- Poprawione SVG: czerwone tło + biały trójkąt -->
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path fill="#ff1f4a" d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.4 41.4 0 0 0 .1 12a41.4 41.4 0 0 0 .4 5.8 4 4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.4-5.8.4-5.8s0-3.9-.4-5.8z"/>
                 <path fill="#ffffff" d="M9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
@@ -559,7 +543,7 @@
         </div>
       </footer>
 
-      <!-- KOMENTARZE (Firebase) -->
+      <!-- KOMENTARZE FIREBASE -->
       <section id="comments-section" class="card comments" aria-labelledby="comments-title">
         <h2 id="comments-title">Komentarze <span id="commentCount" class="comment-count">0</span></h2>
         <p id="commentsHelper" class="helper">Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3</p>
@@ -580,457 +564,554 @@
     </main>
   </div>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK - WAŻNE: musi być przed głównym skryptem! -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
   <script>
-    (function() {
-      // ====== FIREBASE CONFIG ======
-      const firebaseConfig = {
-        apiKey: "AIzaSyAMaNcoWvIeFYUAOBp3yo_NoVK3yHMCGVo",
-        authDomain: "komentarze-vextv.firebaseapp.com",
-        databaseURL: "https://komentarze-vextv-default-rtdb.firebaseio.com",
-        projectId: "komentarze-vextv",
-        storageBucket: "komentarze-vextv.firebasestorage.app",
-        messagingSenderId: "975785630610",
-        appId: "1:975785630610:web:c6eeb8330d6fb770b37f4b",
-        measurementId: "G-38J0B2RY4T"
-      };
+    // ====== FIREBASE CONFIG ======
+    const firebaseConfig = {
+      apiKey: "AIzaSyAMaNcoWvIeFYUAOBp3yo_NoVK3yHMCGVo",
+      authDomain: "komentarze-vextv.firebaseapp.com",
+      databaseURL: "https://komentarze-vextv-default-rtdb.firebaseio.com",
+      projectId: "komentarze-vextv",
+      storageBucket: "komentarze-vextv.firebasestorage.app",
+      messagingSenderId: "975785630610",
+      appId: "1:975785630610:web:c6eeb8330d6fb770b37f4b",
+      measurementId: "G-38J0B2RY4T"
+    };
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
-      const commentsRef = database.ref('comments');
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const commentsRef = database.ref('comments');
 
-      // ====== I18N ======
-      const storageKeyTheme = 'theme';
-      const storageKeyLang = 'site-lang';
-      const supportedLangs = ['pl', 'en', 'ru', 'ja'];
+    // ====== I18N ======
+    const storageKeyTheme = 'theme';
+    const storageKeyLang = 'site-lang';
+    const supportedLangs = ['pl', 'en', 'ru', 'ja'];
 
-      const I18N = {
-        pl: {
-          title: 'Rodzinka Furaska Vexa',
-          description: 'Witamy w rodzince Furaska Vexa — rozgość się i sprawdź, co dla Ciebie przygotowaliśmy.',
-          heroTitle: '𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐',
+    const I18N = {
+      pl: {
+        title: 'Rodzinka Furaska Vexa',
+        description: 'Witamy w rodzince Furaska Vexa — rozgość się i sprawdź, co dla Ciebie przygotowaliśmy.',
+        heroTitle: '𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐',
+        changeLanguageLabel: 'Zmień język',
+        themeDarkBtn: 'Ciemny',
+        themeLightBtn: 'Jasny',
+        themeDarkLabel: 'Przełącz na ciemny motyw',
+        themeLightLabel: 'Przełącz na jasny motyw',
+        ytIframeTitle: 'Odtwarzacz wideo YouTube',
+        introText: 'Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!',
+        subtitleText: 'Miło, że wpadłeś/aś! Rozgość się ☺️',
+        welcomeText: 'Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:',
+        supportBtn: '❤️ Wesprzyj mnie na Tipply',
+        info1: 'Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.',
+        info2: 'Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️',
+        info3: 'W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.',
+        updatesTitle: 'Aktualne informacje',
+        goalLabel: 'Cel subskrypcji — <strong>{n}</strong>',
+        goalAriaLabel: 'Cel subskrypcji {n}',
+        goalIntro: 'Razem dążymy do {n} subów na YouTube! 🎉',
+        discordSoon: 'Serwer Discord już wkrótce!',
+        instaSoon: 'Instagram Furaska – startuje niebawem!',
+        moreInfoNote: 'Będę na bieżąco wrzucał nowe informacje.',
+        findMeText: 'Znajdziesz mnie też tutaj:',
+        ytBtnText: 'Subskrybuj na YouTube',
+        ytAriaLabel: 'Subskrybuj kanał VexTV na YouTube',
+        commentsTitle: 'Komentarze',
+        commentsHelper: 'Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3',
+        namePlaceholder: 'Twoje imię lub nick...',
+        textPlaceholder: 'Napisz komentarz...',
+        submitBtn: '💬 Dodaj komentarz',
+        loadingText: 'Ładowanie komentarzy...',
+        noComments: 'Brak komentarzy',
+        noCommentsDesc: 'Bądź pierwszą osobą, która zostawi komentarz!',
+        deleteBtn: 'Usuń',
+        deleteConfirm: 'Czy na pewno chcesz usunąć ten komentarz?',
+        justNow: 'przed chwilą',
+        minutesAgo: 'min temu',
+        hoursAgo: 'godz. temu',
+        daysAgo: 'dni temu'
+      },
+      en: {
+        title: 'Furaska Vexa Family',
+        description: 'Welcome to the Furaska Vexa family — make yourself at home and see what we've prepared for you.',
+        heroTitle: 'WELCOME TO THE FURASKA VEXA FAMILY',
+        changeLanguageLabel: 'Change language',
+        themeDarkBtn: 'Dark',
+        themeLightBtn: 'Light',
+        themeDarkLabel: 'Switch to dark theme',
+        themeLightLabel: 'Switch to light theme',
+        ytIframeTitle: 'YouTube video player',
+        introText: 'Thanks for stopping by! Make yourself at home and see what I've prepared. Enjoy browsing!',
+        subtitleText: 'Glad you're here! Make yourself comfortable ☺️',
+        welcomeText: 'Hey! Welcome to my website. This is a place where you can feel at home. If you like my projects and want to support me, you can do it here:',
+        supportBtn: '❤️ Support me on Tipply',
+        info1: 'I want you to feel at home 🏠 That's why I'm inviting you to my YouTube channel too — you'll find the link at the bottom of the page.',
+        info2: 'Together we can build a community that means a lot to me. I'll do my best for you ❤️',
+        info3: 'In this section I'll post the most important info and updates.',
+        updatesTitle: 'Latest updates',
+        goalLabel: 'Subscription goal — <strong>{n}</strong>',
+        goalAriaLabel: 'Subscription goal {n}',
+        goalIntro: 'Together we're aiming for {n} subs on YouTube! 🎉',
+        discordSoon: 'Discord server coming soon!',
+        instaSoon: 'Furaska's Instagram — launching soon!',
+        moreInfoNote: 'I'll keep posting new information.',
+        findMeText: 'Find me here too:',
+        ytBtnText: 'Subscribe on YouTube',
+        ytAriaLabel: 'Subscribe to the VexTV channel on YouTube',
+        commentsTitle: 'Comments',
+        commentsHelper: 'If you like this site, leave a comment and tell me what you think. Have a nice day! :3',
+        namePlaceholder: 'Your name or nickname...',
+        textPlaceholder: 'Write a comment...',
+        submitBtn: '💬 Add comment',
+        loadingText: 'Loading comments...',
+        noComments: 'No comments',
+        noCommentsDesc: 'Be the first one to leave a comment!',
+        deleteBtn: 'Delete',
+        deleteConfirm: 'Are you sure you want to delete this comment?',
+        justNow: 'just now',
+        minutesAgo: 'min ago',
+        hoursAgo: 'hours ago',
+        daysAgo: 'days ago'
+      },
+      ru: {
+        title: 'Семья Фураски Векса',
+        description: 'Добро пожаловать в семью Фураски Векса — располагайтесь и посмотрите, что мы для вас приготовили.',
+        heroTitle: 'ДОБРО ПОЖАЛОВАТЬ В СЕМЬЮ ФУРАСКИ ВЕКСА',
+        changeLanguageLabel: 'Сменить язык',
+        themeDarkBtn: 'Тёмная',
+        themeLightBtn: 'Светлая',
+        themeDarkLabel: 'Переключить на тёмную тему',
+        themeLightLabel: 'Переключить на светлую тему',
+        ytIframeTitle: 'Видеоплеер YouTube',
+        introText: 'Спасибо, что заглянул(а)! Чувствуй себя как дома и посмотри, что я подготовил. Приятного просмотра!',
+        subtitleText: 'Рад(а) тебя видеть! Устраивайся поудобнее ☺️',
+        welcomeText: 'Привет! Добро пожаловать на мой сайт. Здесь можно чувствовать себя как дома. Если тебе нравятся мои проекты и ты хочешь меня поддержать, можно сделать это здесь:',
+        supportBtn: '❤️ Поддержать меня на Tipply',
+        info1: 'Хочу, чтобы вы чувствовали себя как дома 🏠 Поэтому приглашаю и на мой YouTube‑канал — ссылка внизу страницы.',
+        info2: 'Вместе мы можем создать важное для меня сообщество. Я постараюсь быть для вас как можно лучше ❤️',
+        info3: 'В этом разделе я буду добавлять самую важную информацию и обновления.',
+        updatesTitle: 'Актуальная информация',
+        goalLabel: 'Цель по подпискам — <strong>{n}</strong>',
+        goalAriaLabel: 'Цель по подпискам {n}',
+        goalIntro: 'Вместе стремимся к {n} подписчикам на YouTube! 🎉',
+        discordSoon: 'Сервер Discord скоро!',
+        instaSoon: 'Instagram Furaska — скоро стартует!',
+        moreInfoNote: 'Буду регулярно публиковать новую информацию.',
+        findMeText: 'Меня можно найти и здесь:',
+        ytBtnText: 'Подпишись на YouTube',
+        ytAriaLabel: 'Подпишись на канал VexTV на YouTube',
+        commentsTitle: 'Комментарии',
+        commentsHelper: 'Если тебе нравится этот сайт, оставь комментарий и расскажи, что думаешь. Хорошего дня! :3',
+        namePlaceholder: 'Твоё имя или ник...',
+        textPlaceholder: 'Напиши комментарий...',
+        submitBtn: '💬 Добавить комментарий',
+        loadingText: 'Загрузка комментариев...',
+        noComments: 'Нет комментариев',
+        noCommentsDesc: 'Будь первым, кто оставит комментарий!',
+        deleteBtn: 'Удалить',
+        deleteConfirm: 'Вы уверены, что хотите удалить этот комментарий?',
+        justNow: 'только что',
+        minutesAgo: 'мин назад',
+        hoursAgo: 'ч назад',
+        daysAgo: 'дн назад'
+      },
+      ja: {
+        title: 'Furaska Vexa ファミリー',
+        description: 'Furaska Vexa ファミリーへようこそ。ゆっくりして、用意したコンテンツを楽しんでね。',
+        heroTitle: 'FURASKA VEXA ファミリーへようこそ',
+        changeLanguageLabel: '言語を変更',
+        themeDarkBtn: 'ダーク',
+        themeLightBtn: 'ライト',
+        themeDarkLabel: 'ダークテーマに切り替え',
+        themeLightLabel: 'ライトテーマに切り替え',
+        ytIframeTitle: 'YouTube 動画プレーヤー',
+        introText: '来てくれてありがとう！ゆっくりして、用意したコンテンツを見ていってね。楽しんで！',
+        subtitleText: '来てくれて嬉しいよ！ごゆっくりどうぞ ☺️',
+        welcomeText: 'やあ！僕のサイトへようこそ。ここは家のようにくつろげる場所だよ。もし僕のプロジェクトが気に入ったら、ここから応援してね：',
+        supportBtn: '❤️ Tipplyで応援する',
+        info1: 'ここを家のように感じてほしい 🏠 YouTubeチャンネルにもぜひ。リンクはページ下部にあるよ。',
+        info2: 'みんなで僕にとって大切なコミュニティを作ろう。みんなのために全力を尽くすよ ❤️',
+        info3: 'このセクションでは重要なお知らせや更新情報を載せるよ。',
+        updatesTitle: '最新情報',
+        goalLabel: '登録目標 — <strong>{n}</strong>',
+        goalAriaLabel: '登録目標 {n}',
+        goalIntro: 'みんなでYouTubeの登録者{n}人を目指そう！🎉',
+        discordSoon: 'Discordサーバーは近日公開！',
+        instaSoon: 'FuraskaのInstagram — もうすぐ始動！',
+        moreInfoNote: '新しい情報を随時更新していくよ。',
+        findMeText: 'こちらでも見つけてね：',
+        ytBtnText: 'YouTubeをチャンネル登録',
+        ytAriaLabel: 'YouTubeでVexTVをチャンネル登録',
+        commentsTitle: 'コメント',
+        commentsHelper: 'このサイトが気に入ったら、コメントで感想を教えてね。良い一日を！:3',
+        namePlaceholder: 'お名前またはニックネーム...',
+        textPlaceholder: 'コメントを書く...',
+        submitBtn: '💬 コメントを追加',
+        loadingText: 'コメントを読み込み中...',
+        noComments: 'コメントがありません',
+        noCommentsDesc: '最初にコメントを残してね！',
+        deleteBtn: '削除',
+        deleteConfirm: 'このコメントを削除してもよろしいですか？',
+        justNow: 'たった今',
+        minutesAgo: '分前',
+        hoursAgo: '時間前',
+        daysAgo: '日前'
+      }
+    };
 
-          changeLanguageLabel: 'Zmień język',
-          themeDarkBtn: 'Ciemny',
-          themeLightBtn: 'Jasny',
-          themeDarkLabel: 'Przełącz na ciemny motyw',
-          themeLightLabel: 'Przełącz na jasny motyw',
-          ytIframeTitle: 'Odtwarzacz wideo YouTube',
+    // ====== HELPER FUNCTIONS ======
+    const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-          introText: 'Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!',
-          subtitleText: 'Miło, że wpadłeś/aś! Rozgość się ☺️',
-          welcomeText: 'Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:',
-          supportBtn: '❤️ Wesprzyj mnie na Tipply',
-          info1: 'Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.',
-          info2: 'Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️',
-          info3: 'W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.',
+    function getLang() {
+      const saved = localStorage.getItem(storageKeyLang);
+      if (saved && supportedLangs.includes(saved)) return saved;
+      const browser = (navigator.language || 'pl').slice(0,2).toLowerCase();
+      return supportedLangs.includes(browser) ? browser : 'pl';
+    }
 
-          updatesTitle: 'Aktualne informacje',
-          goalLabel: 'Cel subskrypcji — <strong>{n}</strong>',
-          goalAriaLabel: 'Cel subskrypcji {n}',
-          goalIntro: 'Razem dążymy do {n} subów na YouTube! 🎉',
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el && typeof value === 'string') {
+        el.innerHTML = value;
+      }
+    }
 
-          discordSoon: 'Serwer Discord już wkrótce!',
-          instaSoon: 'Instagram Furaska – startuje niebawem!',
-          moreInfoNote: 'Będę na bieżąco wrzucał nowe informacje.',
+    function updateLangPanelSelection(lang) {
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.setAttribute('aria-checked', String(btn.dataset.lang === lang));
+      });
+    }
 
-          findMeText: 'Znajdziesz mnie też tutaj:',
-          ytBtnText: 'Subskrybuj na YouTube',
-          ytAriaLabel: 'Subskrybuj kanał VexTV na YouTube',
+    function updateToggleButton(theme) {
+      const btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      const lang = document.documentElement.lang || 'pl';
+      const t = I18N[lang] || I18N.pl;
+      if (theme === 'dark') {
+        btn.innerHTML = '☀️ ' + t.themeLightBtn;
+        btn.setAttribute('aria-label', t.themeLightLabel);
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.innerHTML = '🌙 ' + t.themeDarkBtn;
+        btn.setAttribute('aria-label', t.themeDarkLabel);
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    }
 
-          commentsTitle: 'Komentarze',
-          commentsHelper: 'Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3',
-          namePlaceholder: 'Twoje imię lub nick...',
-          textPlaceholder: 'Napisz komentarz...',
-          submitBtn: '💬 Dodaj komentarz',
-          loadingText: 'Ładowanie komentarzy...',
-          noComments: 'Brak komentarzy',
-          noCommentsDesc: 'Bądź pierwszą osobą, która zostawi komentarz!',
-          deleteBtn: 'Usuń',
-          justNow: 'przed chwilą',
-          minutesAgo: 'min temu',
-          hoursAgo: 'godz. temu',
-          daysAgo: 'dni temu'
-        },
-        en: {
-          title: 'Furaska Vexa Family',
-          description: 'Welcome to the Furaska Vexa family — make yourself at home and see what we've prepared for you.',
-          heroTitle: 'WELCOME TO THE FURASKA VEXA FAMILY',
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      updateToggleButton(theme);
+    }
 
-          changeLanguageLabel: 'Change language',
-          themeDarkBtn: 'Dark',
-          themeLightBtn: 'Light',
-          themeDarkLabel: 'Switch to dark theme',
-          themeLightLabel: 'Switch to light theme',
-          ytIframeTitle: 'YouTube video player',
+    function applyGoalI18n(lang) {
+      const t = I18N[lang] || I18N.pl;
+      const goal = document.querySelector('.updates .goal'); if (!goal) return;
+      const target = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
 
-          introText: 'Thanks for stopping by! Make yourself at home and see what I've prepared. Enjoy browsing!',
-          subtitleText: 'Glad you're here! Make yourself comfortable ☺️',
-          welcomeText: 'Hey! Welcome to my website. This is a place where you can feel at home. If you like my projects and want to support me, you can do it here:',
-          supportBtn: '❤️ Support me on Tipply',
-          info1: 'I want you to feel at home 🏠 That's why I'm inviting you to my YouTube channel too — you'll find the link at the bottom of the page.',
-          info2: 'Together we can build a community that means a lot to me. I'll do my best for you ❤️',
-          info3: 'In this section I'll post the most important info and updates.',
+      const label = document.getElementById('goalLabel');
+      if (label) label.innerHTML = t.goalLabel.replace('{n}', target);
 
-          updatesTitle: 'Latest updates',
-          goalLabel: 'Subscription goal — <strong>{n}</strong>',
-          goalAriaLabel: 'Subscription goal {n}',
-          goalIntro: 'Together we're aiming for {n} subs on YouTube! 🎉',
+      const intro = document.getElementById('goalIntro');
+      if (intro) intro.innerHTML = t.goalIntro.replace('{n}', target);
 
-          discordSoon: 'Discord server coming soon!',
-          instaSoon: 'Furaska's Instagram — launching soon!',
-          moreInfoNote: 'I'll keep posting new information.',
+      goal.setAttribute('aria-label', t.goalAriaLabel.replace('{n}', target));
+    }
 
-          findMeText: 'Find me here too:',
-          ytBtnText: 'Subscribe on YouTube',
-          ytAriaLabel: 'Subscribe to the VexTV channel on YouTube',
+    function applyPageMeta(lang) {
+      const t = I18N[lang] || I18N.pl;
+      document.title = t.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', t.description);
+    }
 
-          commentsTitle: 'Comments',
-          commentsHelper: 'If you like this site, leave a comment and tell me what you think. Have a nice day! :3',
-          namePlaceholder: 'Your name or nickname...',
-          textPlaceholder: 'Write a comment...',
-          submitBtn: '💬 Add comment',
-          loadingText: 'Loading comments...',
-          noComments: 'No comments',
-          noCommentsDesc: 'Be the first one to leave a comment!',
-          deleteBtn: 'Delete',
-          justNow: 'just now',
-          minutesAgo: 'min ago',
-          hoursAgo: 'hours ago',
-          daysAgo: 'days ago'
-        },
-        ru: {
-          title: 'Семья Фураски Векса',
-          description: 'Добро пожаловать в семью Фураски Векса — располагайтесь и посмотрите, что мы для вас приготовили.',
-          heroTitle: 'ДОБРО ПОЖАЛОВАТЬ В СЕМЬЮ ФУРАСКИ ВЕКСА',
+    // ====== COMMENTS FUNCTIONS ======
+    let commentsData = {};
 
-          changeLanguageLabel: 'Сменить язык',
-          themeDarkBtn: 'Тёмная',
-          themeLightBtn: 'Светлая',
-          themeDarkLabel: 'Переключить на тёмную тему',
-          themeLightLabel: 'Переключить на светлую тему',
-          ytIframeTitle: 'Видеоплеер YouTube',
+    function getInitials(name) {
+      return name.trim().charAt(0).toUpperCase() || '?';
+    }
 
-          introText: 'Спасибо, что заглянул(а)! Чувствуй себя как дома и посмотри, что я подготовил. Приятного просмотра!',
-          subtitleText: 'Рад(а) тебя видеть! Устраивайся поудобнее ☺️',
-          welcomeText: 'Привет! Добро пожаловать на мой сайт. Здесь можно чувствовать себя как дома. Если тебе нравятся мои проекты и ты хочешь меня поддержать, можно сделать это здесь:',
-          supportBtn: '❤️ Поддержать меня на Tipply',
-          info1: 'Хочу, чтобы вы чувствовали себя как дома 🏠 Поэтому приглашаю и на мой YouTube‑канал — ссылка внизу страницы.',
-          info2: 'Вместе мы можем создать важное для меня сообщество. Я постараюсь быть для вас как можно лучше ❤️',
-          info3: 'В этом разделе я буду добавлять самую важную информацию и обновления.',
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
 
-          updatesTitle: 'Актуальная информация',
-          goalLabel: 'Цель по подпискам — <strong>{n}</strong>',
-          goalAriaLabel: 'Цель по подпискам {n}',
-          goalIntro: 'Вместе стремимся к {n} подписчикам на YouTube! 🎉',
+    function formatTime(timestamp) {
+      const lang = document.documentElement.lang || 'pl';
+      const t = I18N[lang] || I18N.pl;
+      const now = Date.now();
+      const diff = now - timestamp;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
 
-          discordSoon: 'Сервер Discord скоро!',
-          instaSoon: 'Instagram Furaska — скоро стартует!',
-          moreInfoNote: 'Буду регулярно публиковать новую информацию.',
+      if (minutes < 1) return t.justNow;
+      if (minutes < 60) return minutes + ' ' + t.minutesAgo;
+      if (hours < 24) return hours + ' ' + t.hoursAgo;
+      return days + ' ' + t.daysAgo;
+    }
 
-          findMeText: 'Меня можно найти и здесь:',
-          ytBtnText: 'Подпишись на YouTube',
-          ytAriaLabel: 'Подпишись на канал VexTV на YouTube',
+    function renderComments() {
+      const listEl = document.getElementById('commentsList');
+      const countEl = document.getElementById('commentCount');
+      const lang = document.documentElement.lang || 'pl';
+      const t = I18N[lang] || I18N.pl;
 
-          commentsTitle: 'Комментарии',
-          commentsHelper: 'Если тебе нравится этот сайт, оставь комментарий и расскажи, что думаешь. Хорошего дня! :3',
-          namePlaceholder: 'Твоё имя или ник...',
-          textPlaceholder: 'Напиши комментарий...',
-          submitBtn: '💬 Добавить комментарий',
-          loadingText: 'Загрузка комментариев...',
-          noComments: 'Нет комментариев',
-          noCommentsDesc: 'Будь первым, кто оставит комментарий!',
-          deleteBtn: 'Удалить',
-          justNow: 'только что',
-          minutesAgo: 'мин назад',
-          hoursAgo: 'ч назад',
-          daysAgo: 'дн назад'
-        },
-        ja: {
-          title: 'Furaska Vexa ファミリー',
-          description: 'Furaska Vexa ファミリーへようこそ。ゆっくりして、用意したコンテンツを楽しんでね。',
-          heroTitle: 'FURASKA VEXA ファミリーへようこそ',
+      const entries = Object.entries(commentsData);
+      entries.sort((a, b) => b[1].timestamp - a[1].timestamp);
 
-          changeLanguageLabel: '言語を変更',
-          themeDarkBtn: 'ダーク',
-          themeLightBtn: 'ライト',
-          themeDarkLabel: 'ダークテーマに切り替え',
-          themeLightLabel: 'ライトテーマに切り替え',
-          ytIframeTitle: 'YouTube 動画プレーヤー',
+      if (countEl) countEl.textContent = entries.length;
 
-          introText: '来てくれてありがとう！ゆっくりして、用意したコンテンツを見ていってね。楽しんで！',
-          subtitleText: '来てくれて嬉しいよ！ごゆっくりどうぞ ☺️',
-          welcomeText: 'やあ！僕のサイトへようこそ。ここは家のようにくつろげる場所だよ。もし僕のプロジェクトが気に入ったら、ここから応援してね：',
-          supportBtn: '❤️ Tipplyで応援する',
-          info1: 'ここを家のように感じてほしい 🏠 YouTubeチャンネルにもぜひ。リンクはページ下部にあるよ。',
-          info2: 'みんなで僕にとって大切なコミュニティを作ろう。みんなのために全力を尽くすよ ❤️',
-          info3: 'このセクションでは重要なお知らせや更新情報を載せるよ。',
-
-          updatesTitle: '最新情報',
-          goalLabel: '登録目標 — <strong>{n}</strong>',
-          goalAriaLabel: '登録目標 {n}',
-          goalIntro: 'みんなでYouTubeの登録者{n}人を目指そう！🎉',
-
-          discordSoon: 'Discordサーバーは近日公開！',
-          instaSoon: 'FuraskaのInstagram — もうすぐ始動！',
-          moreInfoNote: '新しい情報を随時更新していくよ。',
-
-          findMeText: 'こちらでも見つけてね：',
-          ytBtnText: 'YouTubeをチャンネル登録',
-          ytAriaLabel: 'YouTubeでVexTVをチャンネル登録',
-
-          commentsTitle: 'コメント',
-          commentsHelper: 'このサイトが気に入ったら、コメントで感想を教えてね。良い一日を！:3',
-          namePlaceholder: 'お名前またはニックネーム...',
-          textPlaceholder: 'コメントを書く...',
-          submitBtn: '💬 コメントを追加',
-          loadingText: 'コメントを読み込み中...',
-          noComments: 'コメントがありません',
-          noCommentsDesc: '最初にコメントを残してね！',
-          deleteBtn: '削除',
-          justNow: 'たった今',
-          minutesAgo: '分前',
-          hoursAgo: '時間前',
-          daysAgo: '日前'
-        }
-      };
-
-      const prefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      function getLang() {
-        const saved = localStorage.getItem(storageKeyLang);
-        if (saved && supportedLangs.includes(saved)) return saved;
-        const browser = (navigator.language || 'pl').slice(0,2).toLowerCase();
-        return supportedLangs.includes(browser) ? browser : 'pl';
+      if (entries.length === 0) {
+        listEl.innerHTML = `
+          <div class="comments-empty">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+            </svg>
+            <div><strong>${t.noComments}</strong></div>
+            <div>${t.noCommentsDesc}</div>
+          </div>
+        `;
+        return;
       }
 
-      function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        updateToggleButton(theme);
-      }
-
-      function updateToggleButton(theme) {
-        const btn = document.getElementById('themeToggle');
-        if (!btn) return;
-        const lang = document.documentElement.lang || 'pl';
-        const t = I18N[lang] || I18N.pl;
-        if (theme === 'dark') {
-          btn.innerHTML = '☀️ ' + t.themeLightBtn;
-          btn.setAttribute('aria-label', t.themeLightLabel);
-          btn.setAttribute('aria-pressed', 'true');
-        } else {
-          btn.innerHTML = '🌙 ' + t.themeDarkBtn;
-          btn.setAttribute('aria-label', t.themeDarkLabel);
-          btn.setAttribute('aria-pressed', 'false');
-        }
-      }
-
-      function setText(id, value) {
-        const el = document.getElementById(id);
-        if (el && typeof value === 'string') {
-          el.innerHTML = value;
-        }
-      }
-
-      function updateLangPanelSelection(lang) {
-        document.querySelectorAll('.lang-option').forEach(btn => {
-          btn.setAttribute('aria-checked', String(btn.dataset.lang === lang));
-        });
-      }
-
-      function applyGoalI18n(lang) {
-        const t = I18N[lang] || I18N.pl;
-        const goal = document.querySelector('.updates .goal'); if (!goal) return;
-        const target  = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
-
-        const label = document.getElementById('goalLabel');
-        if (label) label.innerHTML = t.goalLabel.replace('{n}', target);
-
-        const intro = document.getElementById('goalIntro');
-        if (intro) intro.innerHTML = t.goalIntro.replace('{n}', target);
-
-        goal.setAttribute('aria-label', t.goalAriaLabel.replace('{n}', target));
-      }
-
-      function applyPageMeta(lang) {
-        const t = I18N[lang] || I18N.pl;
-        document.title = t.title;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute('content', t.description);
-      }
-
-      function applyLanguage(lang) {
-        if (!supportedLangs.includes(lang)) lang = 'pl';
-        localStorage.setItem(storageKeyLang, lang);
-        document.documentElement.setAttribute('lang', lang);
-
-        const t = I18N[lang] || I18N.pl;
-
-        // <title> i <meta name="description">
-        applyPageMeta(lang);
-
-        // H1 + główne teksty
-        setText('heroTitle', t.heroTitle);
-        setText('introText', t.introText);
-        setText('subtitleText', t.subtitleText);
-        setText('welcomeText', t.welcomeText);
-        setText('supportBtn', t.supportBtn);
-        setText('infoText1', t.info1);
-        setText('infoText2', t.info2);
-        setText('infoText3', t.info3);
-
-        // Sekcja aktualności i cel
-        setText('updates-title', t.updatesTitle);
-        applyGoalI18n(lang);
-
-        // Lista info
-        setText('discordSoon', t.discordSoon);
-        setText('instaSoon', t.instaSoon);
-        setText('moreInfoNote', t.moreInfoNote);
-
-        // Stopka i przyciski
-        setText('findMeText', t.findMeText);
-        setText('ytBtnText', t.ytBtnText);
-
-        const ytLink = document.getElementById('ytLink');
-        if (ytLink) ytLink.setAttribute('aria-label', t.ytAriaLabel);
-
-        // Iframe tytuł
-        const ytIframe = document.getElementById('ytIframe');
-        if (ytIframe) ytIframe.setAttribute('title', t.ytIframeTitle);
-
-        // Komentarze
-        const commentsTitle = document.getElementById('comments-title');
-        if (commentsTitle) {
-          const countSpan = document.getElementById('commentCount');
-          const countValue = countSpan ? countSpan.textContent : '0';
-          commentsTitle.innerHTML = t.commentsTitle + ' <span id="commentCount" class="comment-count">' + countValue + '</span>';
-        }
-        setText('commentsHelper', t.commentsHelper);
-
-        // Form placeholders
-        const nameInput = document.getElementById('commentName');
-        const textInput = document.getElementById('commentText');
-        const submitBtn = document.getElementById('commentSubmit');
-        const loadingText = document.getElementById('loadingText');
-
-        if (nameInput) nameInput.placeholder = t.namePlaceholder;
-        if (textInput) textInput.placeholder = t.textPlaceholder;
-        if (submitBtn) submitBtn.innerHTML = t.submitBtn;
-        if (loadingText) loadingText.textContent = t.loadingText;
-
-        // UI przełącznika języka
-        const langToggle = document.getElementById('langToggle');
-        if (langToggle) {
-          langToggle.innerHTML = '🌐 ' + lang.toUpperCase();
-          langToggle.setAttribute('aria-label', t.changeLanguageLabel);
-        }
-
-        updateLangPanelSelection(lang);
-
-        // Zaktualizuj podpis przycisku motywu (zgodnie z językiem)
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        updateToggleButton(currentTheme);
-
-        // Przeładuj komentarze z nowym językiem
-        renderComments();
-      }
-
-      // ====== FORMATOWANIE CZASU ======
-      function formatTime(timestamp) {
-        const lang = document.documentElement.lang || 'pl';
-        const t = I18N[lang] || I18N.pl;
-        const now = Date.now();
-        const diff = now - timestamp;
-        const minutes = Math.floor(diff / 60000);
-        const hours = Math.floor(diff / 3600000);
-        const days = Math.floor(diff / 86400000);
-
-        if (minutes < 1) return t.justNow;
-        if (minutes < 60) return minutes + ' ' + t.minutesAgo;
-        if (hours < 24) return hours + ' ' + t.hoursAgo;
-        return days + ' ' + t.daysAgo;
-      }
-
-      // ====== KOMENTARZE ======
-      let commentsData = {};
-
-      function getInitials(name) {
-        return name.trim().charAt(0).toUpperCase() || '?';
-      }
-
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      function renderComments() {
-        const listEl = document.getElementById('commentsList');
-        const countEl = document.getElementById('commentCount');
-        const lang = document.documentElement.lang || 'pl';
-        const t = I18N[lang] || I18N.pl;
-
-        const entries = Object.entries(commentsData);
-        entries.sort((a, b) => b[1].timestamp - a[1].timestamp);
-
-        if (countEl) countEl.textContent = entries.length;
-
-        if (entries.length === 0) {
-          listEl.innerHTML = `
-            <div class="comments-empty">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
-              </svg>
-              <div><strong>${t.noComments}</strong></div>
-              <div>${t.noCommentsDesc}</div>
+      listEl.innerHTML = entries.map(([id, comment]) => `
+        <div class="comment-item" data-id="${id}">
+          <div class="comment-header">
+            <div class="comment-author">
+              <div class="comment-avatar">${getInitials(comment.name)}</div>
+              <span class="comment-name">${escapeHtml(comment.name)}</span>
             </div>
-          `;
+            <div class="comment-meta">
+              <span class="comment-time">${formatTime(comment.timestamp)}</span>
+              <button class="comment-delete" onclick="deleteComment('${id}')" title="${t.deleteBtn}">${t.deleteBtn}</button>
+            </div>
+          </div>
+          <div class="comment-text">${escapeHtml(comment.text)}</div>
+        </div>
+      `).join('');
+    }
+
+    // Globalnie dostępna funkcja usuwania
+    window.deleteComment = function(id) {
+      const lang = document.documentElement.lang || 'pl';
+      const t = I18N[lang] || I18N.pl;
+      
+      if (confirm(t.deleteConfirm)) {
+        commentsRef.child(id).remove();
+      }
+    };
+
+    // ====== APPLY LANGUAGE ======
+    function applyLanguage(lang) {
+      if (!supportedLangs.includes(lang)) lang = 'pl';
+      localStorage.setItem(storageKeyLang, lang);
+      document.documentElement.setAttribute('lang', lang);
+
+      const t = I18N[lang] || I18N.pl;
+
+      applyPageMeta(lang);
+
+      setText('heroTitle', t.heroTitle);
+      setText('introText', t.introText);
+      setText('subtitleText', t.subtitleText);
+      setText('welcomeText', t.welcomeText);
+      setText('supportBtn', t.supportBtn);
+      setText('infoText1', t.info1);
+      setText('infoText2', t.info2);
+      setText('infoText3', t.info3);
+
+      setText('updates-title', t.updatesTitle);
+      applyGoalI18n(lang);
+
+      setText('discordSoon', t.discordSoon);
+      setText('instaSoon', t.instaSoon);
+      setText('moreInfoNote', t.moreInfoNote);
+
+      setText('findMeText', t.findMeText);
+      setText('ytBtnText', t.ytBtnText);
+
+      const ytLink = document.getElementById('ytLink');
+      if (ytLink) ytLink.setAttribute('aria-label', t.ytAriaLabel);
+
+      const ytIframe = document.getElementById('ytIframe');
+      if (ytIframe) ytIframe.setAttribute('title', t.ytIframeTitle);
+
+      // Komentarze
+      const commentsTitle = document.getElementById('comments-title');
+      if (commentsTitle) {
+        const countEl = document.getElementById('commentCount');
+        const countValue = countEl ? countEl.textContent : '0';
+        commentsTitle.innerHTML = t.commentsTitle + ' <span id="commentCount" class="comment-count">' + countValue + '</span>';
+      }
+      setText('commentsHelper', t.commentsHelper);
+
+      const nameInput = document.getElementById('commentName');
+      const textInput = document.getElementById('commentText');
+      const submitBtn = document.getElementById('commentSubmit');
+      const loadingText = document.getElementById('loadingText');
+
+      if (nameInput) nameInput.placeholder = t.namePlaceholder;
+      if (textInput) textInput.placeholder = t.textPlaceholder;
+      if (submitBtn) submitBtn.innerHTML = t.submitBtn;
+      if (loadingText) loadingText.textContent = t.loadingText;
+
+      const langToggle = document.getElementById('langToggle');
+      if (langToggle) {
+        langToggle.innerHTML = '🌐 ' + lang.toUpperCase();
+        langToggle.setAttribute('aria-label', t.changeLanguageLabel);
+      }
+
+      updateLangPanelSelection(lang);
+
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      updateToggleButton(currentTheme);
+
+      renderComments();
+    }
+
+    // ====== INIT ======
+    document.addEventListener('DOMContentLoaded', function() {
+      // Motyw startowy
+      const initialTheme = localStorage.getItem(storageKeyTheme) || (prefersDark() ? 'dark' : 'light');
+      applyTheme(initialTheme);
+
+      // Język startowy
+      const initialLang = getLang();
+      applyLanguage(initialLang);
+
+      // Przełącznik motywu
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        localStorage.setItem(storageKeyTheme, next);
+        applyTheme(next);
+      });
+
+      // Pasek postępu subów
+      (function() {
+        const goal = document.querySelector('.updates .goal'); if (!goal) return;
+        const current = parseInt(goal.getAttribute('data-current'), 10) || 0;
+        const target = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
+        const pct = Math.max(0, Math.min(100, (current / target) * 100));
+        const bar = goal.querySelector('.bar');
+        const valueEl = goal.querySelector('.value');
+        const progressEl = goal.querySelector('.progress');
+        if (bar) bar.style.width = pct + '%';
+        if (valueEl) valueEl.textContent = current + ' / ' + target;
+        if (progressEl) {
+          progressEl.setAttribute('aria-valuenow', current);
+          progressEl.setAttribute('aria-valuemax', target);
+        }
+      })();
+
+      // Panel języków
+      const langToggle = document.getElementById('langToggle');
+      const langPanel = document.getElementById('langPanel');
+
+      function openLangPanel() {
+        langPanel.hidden = false;
+        langToggle.setAttribute('aria-expanded', 'true');
+        const current = langPanel.querySelector('.lang-option[aria-checked="true"]');
+        if (current) current.focus();
+      }
+      function closeLangPanel() {
+        langPanel.hidden = true;
+        langToggle.setAttribute('aria-expanded', 'false');
+      }
+      function toggleLangPanel() {
+        if (langPanel.hidden) openLangPanel(); else closeLangPanel();
+      }
+
+      langToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleLangPanel();
+      });
+
+      langPanel.addEventListener('click', function(e) {
+        const btn = e.target.closest('.lang-option');
+        if (!btn) return;
+        const lang = btn.dataset.lang;
+        if (supportedLangs.includes(lang)) {
+          applyLanguage(lang);
+          closeLangPanel();
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (langPanel.hidden) return;
+        const isInside = e.target === langPanel || langPanel.contains(e.target) || e.target === langToggle;
+        if (!isInside) closeLangPanel();
+      });
+
+      function isTypingTarget(el) {
+        if (!el) return false;
+        const tag = el.tagName ? el.tagName.toLowerCase() : '';
+        const editable = el.isContentEditable || el.getAttribute('contenteditable') === 'true';
+        return editable || tag === 'input' || tag === 'textarea' || tag === 'select';
+      }
+
+      document.addEventListener('keydown', function(e) {
+        const key = e.key.toLowerCase();
+
+        if (key === 'escape') {
+          if (!langPanel.hidden) {
+            e.preventDefault();
+            closeLangPanel();
+          }
           return;
         }
 
-        listEl.innerHTML = entries.map(([id, comment]) => `
-          <div class="comment-item" data-id="${id}">
-            <div class="comment-header">
-              <div class="comment-author">
-                <div class="comment-avatar">${getInitials(comment.name)}</div>
-                <span class="comment-name">${escapeHtml(comment.name)}</span>
-              </div>
-              <div class="comment-meta">
-                <span class="comment-time">${formatTime(comment.timestamp)}</span>
-                <button class="comment-delete" onclick="deleteComment('${id}')" title="${t.deleteBtn}">${t.deleteBtn}</button>
-              </div>
-            </div>
-            <div class="comment-text">${escapeHtml(comment.text)}</div>
-          </div>
-        `).join('');
-      }
+        if (isTypingTarget(e.target)) return;
 
-      // Globalnie dostępna funkcja usuwania
-      window.deleteComment = function(id) {
-        const lang = document.documentElement.lang || 'pl';
-        const confirmMsg = lang === 'pl' ? 'Czy na pewno chcesz usunąć ten komentarz?' :
-                          lang === 'ru' ? 'Вы уверены, что хотите удалить этот комментарий?' :
-                          lang === 'ja' ? 'このコメントを削除してもよろしいですか？' :
-                          'Are you sure you want to delete this comment?';
-        
-        if (confirm(confirmMsg)) {
-          commentsRef.child(id).remove();
+        if (key === 'l') {
+          e.preventDefault();
+          toggleLangPanel();
+          return;
         }
-      };
 
-      // Nasłuchuj zmian w Firebase
-      commentsRef.on('value', (snapshot) => {
+        if (key === 't') {
+          e.preventDefault();
+          const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const next = cur === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(storageKeyTheme, next);
+          applyTheme(next);
+          return;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (langPanel.hidden) return;
+        const options = Array.from(langPanel.querySelectorAll('.lang-option'));
+        const activeIndex = options.findIndex(function(o) { return o.getAttribute('aria-checked') === 'true'; });
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var next = activeIndex;
+          if (e.key === 'ArrowDown') next = (activeIndex + 1) % options.length;
+          if (e.key === 'ArrowUp') next = (activeIndex - 1 + options.length) % options.length;
+          if (options[next]) options[next].focus();
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+          var focused = document.activeElement;
+          if (focused && focused.classList.contains('lang-option')) {
+            focused.click();
+          }
+        }
+      });
+
+      // Firebase - nasłuchuj zmian
+      commentsRef.on('value', function(snapshot) {
         commentsData = snapshot.val() || {};
         renderComments();
       });
 
-      // Obsługa formularza
-      document.getElementById('commentForm')?.addEventListener('submit', function(e) {
+      // Formularz komentarzy
+      document.getElementById('commentForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
         const nameInput = document.getElementById('commentName');
@@ -1051,151 +1132,18 @@
         };
 
         commentsRef.push(newComment)
-          .then(() => {
+          .then(function() {
             nameInput.value = '';
             textInput.value = '';
             submitBtn.disabled = false;
           })
-          .catch((error) => {
+          .catch(function(error) {
             console.error('Błąd dodawania komentarza:', error);
             submitBtn.disabled = false;
             alert('Wystąpił błąd. Spróbuj ponownie.');
           });
       });
-
-      // ====== INICJALIZACJA ======
-      document.addEventListener('DOMContentLoaded', () => {
-        // Ustal motyw startowy
-        const initialTheme = localStorage.getItem(storageKeyTheme) || (prefersDark() ? 'dark' : 'light');
-        applyTheme(initialTheme);
-
-        // Ustal język startowy
-        const initialLang = getLang();
-        applyLanguage(initialLang);
-
-        // Przełącznik motywu (klik)
-        document.getElementById('themeToggle')?.addEventListener('click', () => {
-          const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-          const next = cur === 'dark' ? 'light' : 'dark';
-          localStorage.setItem(storageKeyTheme, next);
-          applyTheme(next);
-        });
-
-        // Pasek postępu subów
-        (function() {
-          const goal = document.querySelector('.updates .goal'); if (!goal) return;
-          const current = parseInt(goal.getAttribute('data-current'), 10) || 0;
-          const target  = parseInt(goal.getAttribute('data-goal'), 10) || 1000;
-          const pct = Math.max(0, Math.min(100, (current / target) * 100));
-          const bar = goal.querySelector('.bar'); const valueEl = goal.querySelector('.value'); const progressEl = goal.querySelector('.progress');
-          if (bar) bar.style.width = pct + '%'; if (valueEl) valueEl.textContent = current + ' / ' + target;
-          if (progressEl) {
-            progressEl.setAttribute('aria-valuenow', current);
-            progressEl.setAttribute('aria-valuemax', target);
-          }
-        })();
-
-        // Panel języków
-        const langToggle = document.getElementById('langToggle');
-        const langPanel  = document.getElementById('langPanel');
-
-        function openLangPanel() {
-          langPanel.hidden = false;
-          langToggle.setAttribute('aria-expanded', 'true');
-          const current = langPanel.querySelector('.lang-option[aria-checked="true"]');
-          current?.focus();
-        }
-        function closeLangPanel() {
-          langPanel.hidden = true;
-          langToggle.setAttribute('aria-expanded', 'false');
-        }
-        function toggleLangPanel() {
-          if (langPanel.hidden) openLangPanel(); else closeLangPanel();
-        }
-
-        langToggle?.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleLangPanel();
-        });
-
-        // Wybór języka
-        langPanel?.addEventListener('click', (e) => {
-          const btn = e.target.closest('.lang-option');
-          if (!btn) return;
-          const lang = btn.dataset.lang;
-          if (supportedLangs.includes(lang)) {
-            applyLanguage(lang);
-            closeLangPanel();
-          }
-        });
-
-        // Zamknij panel klikając poza nim
-        document.addEventListener('click', (e) => {
-          if (!langPanel || langPanel.hidden) return;
-          const isInside = e.target === langPanel || langPanel.contains(e.target) || e.target === langToggle;
-          if (!isInside) closeLangPanel();
-        });
-
-        // Helper do sprawdzania, czy użytkownik pisze
-        function isTypingTarget(el) {
-          if (!el) return false;
-          const tag = el.tagName?.toLowerCase();
-          const editable = el.isContentEditable || el.getAttribute?.('contenteditable') === 'true';
-          return editable || tag === 'input' || tag === 'textarea' || tag === 'select';
-        }
-
-        // Skróty: L — język, T — motyw, Esc — zamyka panel
-        document.addEventListener('keydown', (e) => {
-          const key = e.key.toLowerCase();
-
-          if (key === 'escape') {
-            if (langPanel && !langPanel.hidden) {
-              e.preventDefault();
-              closeLangPanel();
-            }
-            return;
-          }
-
-          if (isTypingTarget(e.target)) return;
-
-          if (key === 'l') {
-            e.preventDefault();
-            toggleLangPanel();
-            return;
-          }
-
-          if (key === 't') {
-            e.preventDefault();
-            const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-            const next = cur === 'dark' ? 'light' : 'dark';
-            localStorage.setItem(storageKeyTheme, next);
-            applyTheme(next);
-            return;
-          }
-        });
-
-        // Strzałki i Enter/Spacja na panelu języka
-        document.addEventListener('keydown', (e) => {
-          if (!langPanel || langPanel.hidden) return;
-          const options = Array.from(langPanel.querySelectorAll('.lang-option'));
-          const activeIndex = options.findIndex(o => o.getAttribute('aria-checked') === 'true');
-
-          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            let next = activeIndex;
-            if (e.key === 'ArrowDown') next = (activeIndex + 1) % options.length;
-            if (e.key === 'ArrowUp') next = (activeIndex - 1 + options.length) % options.length;
-            options[next]?.focus();
-          }
-          if (e.key === 'Enter' || e.key === ' ') {
-            const focused = document.activeElement;
-            if (focused && focused.classList.contains('lang-option')) {
-              focused.click();
-            }
-          }
-        });
-      });
-    })();
+    });
   </script>
 </body>
 </html>
