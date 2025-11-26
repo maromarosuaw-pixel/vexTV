@@ -38,8 +38,6 @@
       --comment-border: rgba(126, 92, 255, 0.2);
       --comment-hover: rgba(126, 92, 255, 0.08);
       --timestamp-color: #8b7ab8;
-      --delete-color: #e74c3c;
-      --delete-hover: #c0392b;
     }
 
     html[data-theme="dark"] {
@@ -70,8 +68,6 @@
       --comment-border: rgba(215, 182, 255, 0.15);
       --comment-hover: rgba(215, 182, 255, 0.08);
       --timestamp-color: #a890d9;
-      --delete-color: #ff6b6b;
-      --delete-hover: #ee5a5a;
     }
 
     * { box-sizing: border-box; }
@@ -332,13 +328,12 @@
 </head>
 <body>
   <div class="bg-hearts" aria-hidden="true">
-    <svg viewBox="0 0 24 24" style="--x: 6%;  --size: 28px; --scale: 1; --dur: 24s; --delay: -2s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
+    <svg viewBox="0 0 24 24" style="--x: 6%; --size: 28px; --scale: 1; --dur: 24s; --delay: -2s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 30%; --size: 40px; --scale: 1.2; --dur: 44s; --delay: -4s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 66%; --size: 42px; --scale: 1.08; --dur: 40s; --delay: -12s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
     <svg viewBox="0 0 24 24" style="--x: 90%; --size: 46px; --scale: 1.15; --dur: 42s; --delay: -22s;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54Z"/></svg>
   </div>
 
-  <!-- PRZYCISKI -->
   <button id="langToggle" class="lang-toggle" type="button">🌐 PL</button>
   <div id="langPanel" class="lang-panel" hidden>
     <button class="lang-option active" data-lang="pl">🇵🇱 Polski</button>
@@ -410,7 +405,6 @@
         </p>
       </footer>
 
-      <!-- KOMENTARZE -->
       <section class="card comments">
         <h2><span id="commentsTitle">Komentarze</span> <span id="commentCount" class="comment-count">0</span></h2>
         <p id="commentsHelper" class="helper">Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3</p>
@@ -426,12 +420,11 @@
     </main>
   </div>
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
   <script>
-    // ========== FIREBASE ==========
+    // Firebase init
     firebase.initializeApp({
       apiKey: "AIzaSyAMaNcoWvIeFYUAOBp3yo_NoVK3yHMCGVo",
       authDomain: "komentarze-vextv.firebaseapp.com",
@@ -443,173 +436,171 @@
     });
 
     var db = firebase.database();
-    var commentsRef = db.ref('comments');
+    var commentsRef = db.ref("comments");
 
-    // ========== TŁUMACZENIA ==========
+    // Tłumaczenia - NAPRAWIONE PRZECINKI
     var LANG = {
       pl: {
-        heroTitle: '𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐',
-        introText: 'Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!',
-        subtitleText: 'Miło, że wpadłeś/aś! Rozgość się ☺️',
-        welcomeText: 'Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:',
-        supportBtn: '❤️ Wesprzyj mnie na Tipply',
-        info1: 'Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.',
-        info2: 'Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️',
-        info3: 'W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.',
-        updatesTitle: 'Aktualne informacje',
-        goalLabel: 'Cel subskrypcji — <strong>1000</strong>',
-        goalIntro: 'Razem dążymy do 1000 subów na YouTube! 🎉',
-        discordSoon: 'Serwer Discord już wkrótce!',
-        instaSoon: 'Instagram Furaska – startuje niebawem!',
-        moreInfoNote: 'Będę na bieżąco wrzucał nowe informacje.',
-        findMeText: 'Znajdziesz mnie też tutaj:',
-        ytBtnText: 'Subskrybuj na YouTube',
-        commentsTitle: 'Komentarze',
-        commentsHelper: 'Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3',
-        namePlaceholder: 'Twoje imię lub nick...',
-        textPlaceholder: 'Napisz komentarz...',
-        submitBtn: '💬 Dodaj komentarz',
-        noComments: 'Brak komentarzy. Bądź pierwszy!',
-        themeDark: '🌙 Ciemny',
-        themeLight: '☀️ Jasny',
-        justNow: 'przed chwilą',
-        minAgo: ' min temu',
-        hAgo: ' godz. temu',
-        dAgo: ' dni temu'
+        heroTitle: "𝓦𝓘𝓣𝓐𝓜𝓨 𝓦 𝓡𝓞𝓓𝓩𝓘𝓝𝓒𝓔 𝓕𝓤𝓡𝓐𝓢𝓚𝓐 𝓥𝓔𝓧𝓐",
+        introText: "Dzięki, że tu wpadłeś! Rozgość się i zobacz, co ciekawego przygotowałem. Miłego przeglądania!",
+        subtitleText: "Miło, że wpadłeś/aś! Rozgość się ☺️",
+        welcomeText: "Hej! Witaj na mojej stronie. To miejsce, w którym możesz poczuć się jak u siebie. Jeśli podobają Ci się moje projekty i chcesz mnie wesprzeć, możesz zrobić to tutaj:",
+        supportBtn: "❤️ Wesprzyj mnie na Tipply",
+        info1: "Chcę, żebyście czuli się tu jak w domu 🏠 Dlatego zapraszam też na mój kanał na YouTube – link znajdziesz na dole strony.",
+        info2: "Razem możemy stworzyć społeczność, na której bardzo mi zależy. Postaram się być dla Was jak najlepszy ❤️",
+        info3: "W tej sekcji będę dodawał najważniejsze informacje i aktualizacje.",
+        updatesTitle: "Aktualne informacje",
+        goalLabel: "Cel subskrypcji — <strong>1000</strong>",
+        goalIntro: "Razem dążymy do 1000 subów na YouTube! 🎉",
+        discordSoon: "Serwer Discord już wkrótce!",
+        instaSoon: "Instagram Furaska – startuje niebawem!",
+        moreInfoNote: "Będę na bieżąco wrzucał nowe informacje.",
+        findMeText: "Znajdziesz mnie też tutaj:",
+        ytBtnText: "Subskrybuj na YouTube",
+        commentsTitle: "Komentarze",
+        commentsHelper: "Jeśli podoba Ci się ta strona, zostaw komentarz i daj znać, co o niej myślisz. Miłego dnia! :3",
+        namePlaceholder: "Twoje imię lub nick...",
+        textPlaceholder: "Napisz komentarz...",
+        submitBtn: "💬 Dodaj komentarz",
+        noComments: "Brak komentarzy. Bądź pierwszy!",
+        themeDark: "🌙 Ciemny",
+        themeLight: "☀️ Jasny",
+        justNow: "przed chwilą",
+        minAgo: " min temu",
+        hAgo: " godz. temu",
+        dAgo: " dni temu"
       },
       en: {
-        heroTitle: 'WELCOME TO THE FURASKA VEXA FAMILY',
-        introText: 'Thanks for stopping by! Make yourself at home and see what I\'ve prepared. Enjoy browsing!',
-        subtitleText: 'Glad you\'re here! Make yourself comfortable ☺️',
-        welcomeText: 'Hey! Welcome to my website. This is a place where you can feel at home. If you like my projects and want to support me, you can do it here:',
-        supportBtn: '❤️ Support me on Tipply',
-        info1: 'I want you to feel at home 🏠 That\'s why I\'m inviting you to my YouTube channel too — you\'ll find the link at the bottom.',
-        info2: 'Together we can build a community that means a lot to me. I\'ll do my best for you ❤️',
-        info3: 'In this section I\'ll post the most important info and updates.',
-        updatesTitle: 'Latest updates',
-        goalLabel: 'Subscription goal — <strong>1000</strong>',
-        goalIntro: 'Together we\'re aiming for 1000 subs on YouTube! 🎉',
-        discordSoon: 'Discord server coming soon!',
-        instaSoon: 'Furaska\'s Instagram — launching soon!',
-        moreInfoNote: 'I\'ll keep posting new information.',
-        findMeText: 'Find me here too:',
-        ytBtnText: 'Subscribe on YouTube',
-        commentsTitle: 'Comments',
-        commentsHelper: 'If you like this site, leave a comment and tell me what you think. Have a nice day! :3',
-        namePlaceholder: 'Your name or nickname...',
-        textPlaceholder: 'Write a comment...',
-        submitBtn: '💬 Add comment',
-        noComments: 'No comments yet. Be the first!',
-        themeDark: '🌙 Dark',
-        themeLight: '☀️ Light',
-        justNow: 'just now',
-        minAgo: ' min ago',
-        hAgo: ' hours ago',
-        dAgo: ' days ago'
+        heroTitle: "WELCOME TO THE FURASKA VEXA FAMILY",
+        introText: "Thanks for stopping by! Make yourself at home and see what I have prepared. Enjoy browsing!",
+        subtitleText: "Glad you are here! Make yourself comfortable ☺️",
+        welcomeText: "Hey! Welcome to my website. This is a place where you can feel at home. If you like my projects and want to support me, you can do it here:",
+        supportBtn: "❤️ Support me on Tipply",
+        info1: "I want you to feel at home 🏠 That is why I am inviting you to my YouTube channel too — you will find the link at the bottom.",
+        info2: "Together we can build a community that means a lot to me. I will do my best for you ❤️",
+        info3: "In this section I will post the most important info and updates.",
+        updatesTitle: "Latest updates",
+        goalLabel: "Subscription goal — <strong>1000</strong>",
+        goalIntro: "Together we are aiming for 1000 subs on YouTube! 🎉",
+        discordSoon: "Discord server coming soon!",
+        instaSoon: "Furaska Instagram — launching soon!",
+        moreInfoNote: "I will keep posting new information.",
+        findMeText: "Find me here too:",
+        ytBtnText: "Subscribe on YouTube",
+        commentsTitle: "Comments",
+        commentsHelper: "If you like this site, leave a comment and tell me what you think. Have a nice day! :3",
+        namePlaceholder: "Your name or nickname...",
+        textPlaceholder: "Write a comment...",
+        submitBtn: "💬 Add comment",
+        noComments: "No comments yet. Be the first!",
+        themeDark: "🌙 Dark",
+        themeLight: "☀️ Light",
+        justNow: "just now",
+        minAgo: " min ago",
+        hAgo: " hours ago",
+        dAgo: " days ago"
       },
       ru: {
-        heroTitle: 'ДОБРО ПОЖАЛОВАТЬ В СЕМЬЮ ФУРАСКИ ВЕКСА',
-        introText: 'Спасибо, что заглянул! Чувствуй себя как дома. Приятного просмотра!',
-        subtitleText: 'Рад тебя видеть! Устраивайся поудобнее ☺️',
-        welcomeText: 'Привет! Добро пожаловать на мой сайт. Здесь можно чувствовать себя как дома. Если тебе нравятся мои проекты, можешь поддержать меня здесь:',
-        supportBtn: '❤️ Поддержать на Tipply',
-        info1: 'Хочу, чтобы вы чувствовали себя как дома 🏠 Приглашаю на мой YouTube‑канал — ссылка внизу.',
-        info2: 'Вместе мы можем создать важное сообщество. Я постараюсь быть лучшим ❤️',
-        info3: 'В этом разделе буду добавлять важную информацию.',
-        updatesTitle: 'Актуальная информация',
-        goalLabel: 'Цель подписок — <strong>1000</strong>',
-        goalIntro: 'Вместе стремимся к 1000 подписчикам! 🎉',
-        discordSoon: 'Сервер Discord скоро!',
-        instaSoon: 'Instagram Furaska — скоро!',
-        moreInfoNote: 'Буду регулярно публиковать новости.',
-        findMeText: 'Найди меня здесь:',
-        ytBtnText: 'Подпишись на YouTube',
-        commentsTitle: 'Комментарии',
-        commentsHelper: 'Если нравится сайт, оставь комментарий! Хорошего дня! :3',
-        namePlaceholder: 'Твоё имя или ник...',
-        textPlaceholder: 'Напиши комментарий...',
-        submitBtn: '💬 Добавить',
-        noComments: 'Нет комментариев. Будь первым!',
-        themeDark: '🌙 Тёмная',
-        themeLight: '☀️ Светлая',
-        justNow: 'только что',
-        minAgo: ' мин назад',
-        hAgo: ' ч назад',
-        dAgo: ' дн назад'
+        heroTitle: "ДОБРО ПОЖАЛОВАТЬ В СЕМЬЮ ФУРАСКИ ВЕКСА",
+        introText: "Спасибо, что заглянул! Чувствуй себя как дома. Приятного просмотра!",
+        subtitleText: "Рад тебя видеть! Устраивайся поудобнее ☺️",
+        welcomeText: "Привет! Добро пожаловать на мой сайт. Здесь можно чувствовать себя как дома. Если тебе нравятся мои проекты, можешь поддержать меня здесь:",
+        supportBtn: "❤️ Поддержать на Tipply",
+        info1: "Хочу, чтобы вы чувствовали себя как дома 🏠 Приглашаю на мой YouTube-канал — ссылка внизу.",
+        info2: "Вместе мы можем создать важное сообщество. Я постараюсь быть лучшим ❤️",
+        info3: "В этом разделе буду добавлять важную информацию.",
+        updatesTitle: "Актуальная информация",
+        goalLabel: "Цель подписок — <strong>1000</strong>",
+        goalIntro: "Вместе стремимся к 1000 подписчикам! 🎉",
+        discordSoon: "Сервер Discord скоро!",
+        instaSoon: "Instagram Furaska — скоро!",
+        moreInfoNote: "Буду регулярно публиковать новости.",
+        findMeText: "Найди меня здесь:",
+        ytBtnText: "Подпишись на YouTube",
+        commentsTitle: "Комментарии",
+        commentsHelper: "Если нравится сайт, оставь комментарий! Хорошего дня! :3",
+        namePlaceholder: "Твоё имя или ник...",
+        textPlaceholder: "Напиши комментарий...",
+        submitBtn: "💬 Добавить",
+        noComments: "Нет комментариев. Будь первым!",
+        themeDark: "🌙 Тёмная",
+        themeLight: "☀️ Светлая",
+        justNow: "только что",
+        minAgo: " мин назад",
+        hAgo: " ч назад",
+        dAgo: " дн назад"
       },
       ja: {
-        heroTitle: 'FURASKA VEXAファミリーへようこそ',
-        introText: '来てくれてありがとう！ゆっくりしていってね。楽しんで！',
-        subtitleText: '来てくれて嬉しいよ！ごゆっくり ☺️',
-        welcomeText: 'やあ！僕のサイトへようこそ。ここは家のようにくつろげる場所だよ。応援してくれるなら：',
-        supportBtn: '❤️ Tipplyで応援',
-        info1: 'ここを家のように感じてほしい 🏠 YouTubeチャンネルにもぜひ。',
-        info2: 'みんなで大切なコミュニティを作ろう ❤️',
-        info3: 'このセクションで重要な情報を載せるよ。',
-        updatesTitle: '最新情報',
-        goalLabel: '登録目標 — <strong>1000</strong>',
-        goalIntro: 'みんなで1000人目指そう！🎉',
-        discordSoon: 'Discordサーバー近日公開！',
-        instaSoon: 'Instagram — もうすぐ！',
-        moreInfoNote: '新しい情報を随時更新。',
-        findMeText: 'こちらでも：',
-        ytBtnText: 'YouTubeを登録',
-        commentsTitle: 'コメント',
-        commentsHelper: '気に入ったらコメントしてね！良い一日を！:3',
-        namePlaceholder: '名前またはニックネーム...',
-        textPlaceholder: 'コメントを書く...',
-        submitBtn: '💬 追加',
-        noComments: 'コメントがありません。最初にコメントしてね！',
-        themeDark: '🌙 ダーク',
-        themeLight: '☀️ ライト',
-        justNow: 'たった今',
-        minAgo: '分前',
-        hAgo: '時間前',
-        dAgo: '日前'
+        heroTitle: "FURASKA VEXAファミリーへようこそ",
+        introText: "来てくれてありがとう！ゆっくりしていってね。楽しんで！",
+        subtitleText: "来てくれて嬉しいよ！ごゆっくり ☺️",
+        welcomeText: "やあ！僕のサイトへようこそ。ここは家のようにくつろげる場所だよ。応援してくれるなら：",
+        supportBtn: "❤️ Tipplyで応援",
+        info1: "ここを家のように感じてほしい 🏠 YouTubeチャンネルにもぜひ。",
+        info2: "みんなで大切なコミュニティを作ろう ❤️",
+        info3: "このセクションで重要な情報を載せるよ。",
+        updatesTitle: "最新情報",
+        goalLabel: "登録目標 — <strong>1000</strong>",
+        goalIntro: "みんなで1000人目指そう！🎉",
+        discordSoon: "Discordサーバー近日公開！",
+        instaSoon: "Instagram — もうすぐ！",
+        moreInfoNote: "新しい情報を随時更新。",
+        findMeText: "こちらでも：",
+        ytBtnText: "YouTubeを登録",
+        commentsTitle: "コメント",
+        commentsHelper: "気に入ったらコメントしてね！良い一日を！:3",
+        namePlaceholder: "名前またはニックネーム...",
+        textPlaceholder: "コメントを書く...",
+        submitBtn: "💬 追加",
+        noComments: "コメントがありません。最初にコメントしてね！",
+        themeDark: "🌙 ダーク",
+        themeLight: "☀️ ライト",
+        justNow: "たった今",
+        minAgo: "分前",
+        hAgo: "時間前",
+        dAgo: "日前"
       }
     };
 
-    var currentLang = 'pl';
-    var currentTheme = 'light';
+    var currentLang = "pl";
+    var currentTheme = "light";
     var commentsData = {};
 
-    // ========== FUNKCJE ==========
-    function $(id) { return document.getElementById(id); }
+    function $(id) {
+      return document.getElementById(id);
+    }
 
     function setLang(lang) {
       currentLang = lang;
-      localStorage.setItem('lang', lang);
+      localStorage.setItem("lang", lang);
       var t = LANG[lang];
 
-      $('heroTitle').innerHTML = t.heroTitle;
-      $('introText').textContent = t.introText;
-      $('subtitleText').textContent = t.subtitleText;
-      $('welcomeText').textContent = t.welcomeText;
-      $('supportBtn').textContent = t.supportBtn;
-      $('infoText1').textContent = t.info1;
-      $('infoText2').textContent = t.info2;
-      $('infoText3').textContent = t.info3;
-      $('updatesTitle').textContent = t.updatesTitle;
-      $('goalLabel').innerHTML = t.goalLabel;
-      $('goalIntro').textContent = t.goalIntro;
-      $('discordSoon').textContent = t.discordSoon;
-      $('instaSoon').textContent = t.instaSoon;
-      $('moreInfoNote').textContent = t.moreInfoNote;
-      $('findMeText').textContent = t.findMeText;
-      $('ytBtnText').textContent = t.ytBtnText;
-      $('commentsTitle').textContent = t.commentsTitle;
-      $('commentsHelper').textContent = t.commentsHelper;
-      $('commentName').placeholder = t.namePlaceholder;
-      $('commentText').placeholder = t.textPlaceholder;
-      $('commentSubmit').textContent = t.submitBtn;
-      $('langToggle').textContent = '🌐 ' + lang.toUpperCase();
+      $("heroTitle").innerHTML = t.heroTitle;
+      $("introText").textContent = t.introText;
+      $("subtitleText").textContent = t.subtitleText;
+      $("welcomeText").textContent = t.welcomeText;
+      $("supportBtn").textContent = t.supportBtn;
+      $("infoText1").textContent = t.info1;
+      $("infoText2").textContent = t.info2;
+      $("infoText3").textContent = t.info3;
+      $("updatesTitle").textContent = t.updatesTitle;
+      $("goalLabel").innerHTML = t.goalLabel;
+      $("goalIntro").textContent = t.goalIntro;
+      $("discordSoon").textContent = t.discordSoon;
+      $("instaSoon").textContent = t.instaSoon;
+      $("moreInfoNote").textContent = t.moreInfoNote;
+      $("findMeText").textContent = t.findMeText;
+      $("ytBtnText").textContent = t.ytBtnText;
+      $("commentsTitle").textContent = t.commentsTitle;
+      $("commentsHelper").textContent = t.commentsHelper;
+      $("commentName").placeholder = t.namePlaceholder;
+      $("commentText").placeholder = t.textPlaceholder;
+      $("commentSubmit").textContent = t.submitBtn;
+      $("langToggle").textContent = "🌐 " + lang.toUpperCase();
+      $("themeToggle").textContent = currentTheme === "dark" ? t.themeLight : t.themeDark;
 
-      // Update theme button text
-      $('themeToggle').textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
-
-      // Update lang panel
-      document.querySelectorAll('.lang-option').forEach(function(btn) {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+      document.querySelectorAll(".lang-option").forEach(function(btn) {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
       });
 
       renderComments();
@@ -617,10 +608,10 @@
 
     function setTheme(theme) {
       currentTheme = theme;
-      localStorage.setItem('theme', theme);
-      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem("theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
       var t = LANG[currentLang];
-      $('themeToggle').textContent = theme === 'dark' ? t.themeLight : t.themeDark;
+      $("themeToggle").textContent = theme === "dark" ? t.themeLight : t.themeDark;
     }
 
     function formatTime(timestamp) {
@@ -637,18 +628,20 @@
     }
 
     function escapeHtml(str) {
-      var div = document.createElement('div');
+      var div = document.createElement("div");
       div.textContent = str;
       return div.innerHTML;
     }
 
     function renderComments() {
-      var list = $('commentsList');
-      var count = $('commentCount');
+      var list = $("commentsList");
+      var count = $("commentCount");
       var t = LANG[currentLang];
 
       var entries = Object.entries(commentsData);
-      entries.sort(function(a, b) { return b[1].timestamp - a[1].timestamp; });
+      entries.sort(function(a, b) {
+        return b[1].timestamp - a[1].timestamp;
+      });
 
       count.textContent = entries.length;
 
@@ -657,11 +650,11 @@
         return;
       }
 
-      var html = '';
-      entries.forEach(function(entry) {
-        var id = entry[0];
-        var c = entry[1];
-        var initial = c.name.trim().charAt(0).toUpperCase() || '?';
+      var html = "";
+      for (var i = 0; i < entries.length; i++) {
+        var id = entries[i][0];
+        var c = entries[i][1];
+        var initial = c.name.trim().charAt(0).toUpperCase() || "?";
         html += '<div class="comment-item" data-id="' + id + '">' +
           '<div class="comment-header">' +
             '<div class="comment-author">' +
@@ -672,92 +665,87 @@
           '</div>' +
           '<div class="comment-text">' + escapeHtml(c.text) + '</div>' +
         '</div>';
-      });
+      }
       list.innerHTML = html;
     }
 
-    // ========== INIT ==========
-    document.addEventListener('DOMContentLoaded', function() {
-      // Załaduj zapisane ustawienia
-      var savedLang = localStorage.getItem('lang') || 'pl';
-      var savedTheme = localStorage.getItem('theme') || 'light';
+    // INIT
+    document.addEventListener("DOMContentLoaded", function() {
+      var savedLang = localStorage.getItem("lang") || "pl";
+      var savedTheme = localStorage.getItem("theme") || "light";
 
       setTheme(savedTheme);
       setLang(savedLang);
 
-      // Przełącznik motywu
-      $('themeToggle').addEventListener('click', function() {
-        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      $("themeToggle").addEventListener("click", function() {
+        setTheme(currentTheme === "dark" ? "light" : "dark");
       });
 
-      // Przełącznik języka
-      $('langToggle').addEventListener('click', function(e) {
+      $("langToggle").addEventListener("click", function(e) {
         e.stopPropagation();
-        var panel = $('langPanel');
+        var panel = $("langPanel");
         panel.hidden = !panel.hidden;
       });
 
-      // Wybór języka
-      $('langPanel').addEventListener('click', function(e) {
-        var btn = e.target.closest('.lang-option');
+      $("langPanel").addEventListener("click", function(e) {
+        var btn = e.target.closest(".lang-option");
         if (btn) {
           setLang(btn.dataset.lang);
-          $('langPanel').hidden = true;
+          $("langPanel").hidden = true;
         }
       });
 
-      // Zamknij panel klikając gdziekolwiek
-      document.addEventListener('click', function(e) {
-        if (!$('langPanel').hidden && !e.target.closest('.lang-panel') && e.target !== $('langToggle')) {
-          $('langPanel').hidden = true;
+      document.addEventListener("click", function(e) {
+        var panel = $("langPanel");
+        if (!panel.hidden && !e.target.closest(".lang-panel") && e.target !== $("langToggle")) {
+          panel.hidden = true;
         }
       });
 
-      // Firebase - nasłuchuj komentarzy
-      commentsRef.on('value', function(snapshot) {
+      // Firebase listener
+      commentsRef.on("value", function(snapshot) {
         commentsData = snapshot.val() || {};
         renderComments();
       });
 
-      // Wysyłanie komentarza
-      $('commentForm').addEventListener('submit', function(e) {
+      // Form submit
+      $("commentForm").addEventListener("submit", function(e) {
         e.preventDefault();
 
-        var name = $('commentName').value.trim();
-        var text = $('commentText').value.trim();
+        var name = $("commentName").value.trim();
+        var text = $("commentText").value.trim();
 
         if (!name || !text) return;
 
-        $('commentSubmit').disabled = true;
+        $("commentSubmit").disabled = true;
 
         commentsRef.push({
           name: name,
           text: text,
           timestamp: Date.now()
         }).then(function() {
-          $('commentName').value = '';
-          $('commentText').value = '';
-          $('commentSubmit').disabled = false;
+          $("commentName").value = "";
+          $("commentText").value = "";
+          $("commentSubmit").disabled = false;
         }).catch(function(err) {
           console.error(err);
-          $('commentSubmit').disabled = false;
-          alert('Błąd! Spróbuj ponownie.');
+          $("commentSubmit").disabled = false;
+          alert("Błąd! Spróbuj ponownie.");
         });
       });
 
-      // Skróty klawiszowe
-      document.addEventListener('keydown', function(e) {
-        // Nie działaj gdy piszemy
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function(e) {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
-        if (e.key === 't' || e.key === 'T') {
-          setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        if (e.key === "t" || e.key === "T") {
+          setTheme(currentTheme === "dark" ? "light" : "dark");
         }
-        if (e.key === 'l' || e.key === 'L') {
-          $('langPanel').hidden = !$('langPanel').hidden;
+        if (e.key === "l" || e.key === "L") {
+          $("langPanel").hidden = !$("langPanel").hidden;
         }
-        if (e.key === 'Escape') {
-          $('langPanel').hidden = true;
+        if (e.key === "Escape") {
+          $("langPanel").hidden = true;
         }
       });
     });
